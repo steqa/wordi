@@ -1,6 +1,7 @@
 from django.contrib import admin
+from django.utils.safestring import mark_safe
 
-from .models import Card
+from .models import Card, CardImages
 
 
 @admin.register(Card)
@@ -29,3 +30,49 @@ class CardAdmin(admin.ModelAdmin):
                 'date_updated',
             )}),
     )
+
+
+@admin.register(CardImages)
+class CardImagesAdmin(admin.ModelAdmin):
+    list_display = ('card', 'front_image_preview', 'back_image_preview')
+    readonly_fields = ('id', 'front_image_preview_inside',
+                       'back_image_preview_inside')
+    fieldsets = (
+        (None,
+            {'fields': (
+                'id',
+                'card',
+            )}),
+        ('Передняя сторона',
+            {'fields': (
+                'front_image',
+                'front_image_preview_inside',
+            )}),
+        ('Задняя сторона',
+            {'fields': (
+                'back_image',
+                'back_image_preview_inside',
+            )}),
+    )
+
+    def front_image_preview(self, card: Card):
+        return mark_safe(f'<img src="{card.front_image.url}" style="max-height: 25px;">')
+
+    front_image_preview.short_description = 'изображение на передней стороне'
+
+    def back_image_preview(self, card: Card):
+        return mark_safe(f'<img src="{card.back_image.url}" style="max-height: 25px;">')
+
+    back_image_preview.short_description = 'изображение на задней стороне'
+
+    def front_image_preview_inside(self, card: Card):
+        print(card.front_image)
+        return mark_safe(f'<img src="{card.front_image.url}" style="max-height: 200px;">')
+
+    front_image_preview_inside.short_description = 'просмотр изображения на передней стороне'
+
+    def back_image_preview_inside(self, card: Card):
+        print(card.front_image)
+        return mark_safe(f'<img src="{card.back_image.url}" style="max-height: 200px;">')
+
+    back_image_preview_inside.short_description = 'просмотр изображения на задней стороне'
