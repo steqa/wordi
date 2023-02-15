@@ -56,23 +56,33 @@ class CardImagesAdmin(admin.ModelAdmin):
     )
 
     def front_image_preview(self, card: Card):
-        return mark_safe(f'<img src="{card.front_image.url}" style="max-height: 25px;">')
+        if card.front_image:
+            return mark_safe(f'<img src="{card.front_image.url}" style="max-height: 25px;">')
+        else:
+            return 'Отсутствует'
 
     front_image_preview.short_description = 'изображение на передней стороне'
 
     def back_image_preview(self, card: Card):
-        return mark_safe(f'<img src="{card.back_image.url}" style="max-height: 25px;">')
+        if card.back_image:
+            return mark_safe(f'<img src="{card.back_image.url}" style="max-height: 25px;">')
+        else:
+            return 'Отсутствует'
 
     back_image_preview.short_description = 'изображение на задней стороне'
 
     def front_image_preview_inside(self, card: Card):
-        print(card.front_image)
-        return mark_safe(f'<img src="{card.front_image.url}" style="max-height: 200px;">')
+        if card.front_image:
+            return mark_safe(f'<img src="{card.front_image.url}" style="max-height: 200px;">')
+        else:
+            return 'Отсутствует'
 
     front_image_preview_inside.short_description = 'просмотр изображения на передней стороне'
 
     def back_image_preview_inside(self, card: Card):
-        print(card.front_image)
-        return mark_safe(f'<img src="{card.back_image.url}" style="max-height: 200px;">')
+        if card.back_image:
+            return mark_safe(f'<img src="{card.back_image.url}" style="max-height: 200px;">')
+        else:
+            return 'Отсутствует'
 
     back_image_preview_inside.short_description = 'просмотр изображения на задней стороне'

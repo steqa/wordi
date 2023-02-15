@@ -36,10 +36,10 @@ class CardImages(models.Model):
         Card, verbose_name='карточка', on_delete=models.CASCADE)
     front_image = models.ImageField(
         verbose_name="изображение на передней стороне",
-        upload_to=_get_card_front_image_filepath)
+        upload_to=_get_card_front_image_filepath, blank=True, null=True)
     back_image = models.ImageField(
         verbose_name="изображение на задней стороне",
-        upload_to=_get_card_back_image_filepath)
+        upload_to=_get_card_back_image_filepath, blank=True, null=True)
 
     class Meta:
         verbose_name = 'изображения карточки'
