@@ -1,8 +1,10 @@
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from accounts.models import User
 from cards.models import Card, CardImages
 from wordi.tests.mixins import TestFieldsParametersValuesMixin
+
+User = get_user_model()
 
 
 class CardTests(TestCase, TestFieldsParametersValuesMixin):
