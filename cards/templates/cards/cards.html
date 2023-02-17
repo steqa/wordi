@@ -1,77 +1,90 @@
 {% extends 'cards/base.html' %}
-{% block title %}Cards{% endblock %}
+{% block title %}Карточки{% endblock %}
+{% block cards-active %}active{% endblock %}
 {% block content %}
     <div class="container">
         <div class="d-grid my-4">
             <button class="btn btn-outline-primary" type="button">Создать карточку</button>
         </div>
-        {% for i in '0123456789' %}
-            <div class="card my-4 bg-body-tertiary">
-                <div class="card-header d-flex justify-content-end">
-                    <button class="icon-btn edit-icon-btn me-2">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                             width="16"
-                             height="16"
-                             fill="currentColor"
-                             class="bi bi-pencil-fill pb-1"
-                             viewBox="0 0 16 16">
-                            <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                        </svg>
-                    </button>
-                    <button class="icon-btn remove-icon-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                             width="16"
-                             height="16"
-                             fill="currentColor"
-                             class="bi bi-trash-fill pb-1"
-                             viewBox="0 0 16 16">
-                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-                        </svg>
-                    </button>
-                </div>
-                <div class="card-body row g-3">
-                    <div class="col-6 border-end">
-                        <div class="clearfix">
-                            <div class="card-image float-end">
-                                <div class="ratio">
-                                    <div class="ratio-inner ratio-1-1">
-                                        <div class="ratio-content">
-                                            <img src="https://assets.avtocod.ru/storage/images/articles-2022/otnyud-ne-bmw-top-10-samykh-dorogikh-mashin-mira-v-2022-godu/otnyud-ne-bmw-top-10-samykh-dorogikh-mashin-mira-v-2022-godu-3-min.jpg"
-                                                 class="img-100"
-                                                 alt="...">
-                                        </div>
-                                    </div>
-                                </div>
+        {% if request.user.is_authenticated %}
+            {% for card in cards %}
+                <div class="card my-4 bg-body-tertiary">
+                    <div class="card-header d-flex justify-content-end">
+                        <button class="icon-btn edit-icon-btn me-2">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="16"
+                                 height="16"
+                                 fill="currentColor"
+                                 class="bi bi-pencil-fill pb-1"
+                                 viewBox="0 0 16 16">
+                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                            </svg>
+                        </button>
+                        <button class="icon-btn remove-icon-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="16"
+                                 height="16"
+                                 fill="currentColor"
+                                 class="bi bi-trash-fill pb-1"
+                                 viewBox="0 0 16 16">
+                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="card-body row g-3">
+                        <div class="col-6 border-end">
+                            <div class="clearfix">
+                                {% for card_image in cards_images %}
+                                    {% if card_image.front_image %}
+                                        {% if card_image.card == card %}
+                                            <div class="card-image float-end">
+                                                <div class="ratio">
+                                                    <div class="ratio-inner ratio-1-1">
+                                                        <div class="ratio-content">
+                                                            <img src="{{ card_image.front_image.url }}" class="img-100" alt="...">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                                <p class="card-text">{{ card.front_text }}</p>
                             </div>
-                            <p class="card-text">
-                                Car _____ типо какое то предложение и я придумал, что тут надо вставлять слова. А это типо _____ второе предложение.
-                            </p>
+                        </div>
+                        <div class="col-6 border-start">
+                            <div class="clearfix">
+                                {% for card_image in cards_images %}
+                                    {% if card_image.back_image %}
+                                        {% if card_image.card == card %}
+                                            <div class="card-image float-end">
+                                                <div class="ratio">
+                                                    <div class="ratio-inner ratio-1-1">
+                                                        <div class="ratio-content">
+                                                            <img src="{{ card_image.back_image.url }}" class="img-100" alt="...">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                                <p class="card-text">{{ card.back_text }}</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-6 border-start">
-                        <div class="clearfix">
-                            <div class="card-image float-end">
-                                <div class="ratio">
-                                    <div class="ratio-inner ratio-1-1">
-                                        <div class="ratio-content">
-                                            <img src="https://assets.avtocod.ru/storage/images/articles-2022/otnyud-ne-bmw-top-10-samykh-dorogikh-mashin-mira-v-2022-godu/otnyud-ne-bmw-top-10-samykh-dorogikh-mashin-mira-v-2022-godu-3-min.jpg"
-                                                 class="img-100"
-                                                 alt="...">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="card-text">Автомобиль</p>
+                    <div class="card-footer">
+                        <div class="row text-center">
+                            <span class="col-6">Передняя сторона</span>
+                            <span class="col-6">Задняя сторона</span>
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
-                    <div class="row text-center">
-                        <span class="col-6">Передняя сторона</span>
-                        <span class="col-6">Задняя сторона</span>
-                    </div>
-                </div>
+            {% endfor %}
+        {% else %}
+            <div class="text-center">
+                <p>У вас пока нет карточек.</p>
             </div>
-        {% endfor %}
+        {% endif %}
     </div>
 {% endblock %}
