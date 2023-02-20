@@ -34,6 +34,9 @@ formImageClearBtns.forEach((btn) => {
 			placeholderTextShow = document.getElementById('placeholderBackImageShow');
 		}
 		clearPreviewImage(input, btn, placeholderTextHide, placeholderTextShow);
+		const feedbackBlock = input.parentNode.querySelector('.invalid-feedback');
+		input.classList.remove('is-invalid');
+		feedbackBlock.innerHTML = '';
 	});
 });
 
