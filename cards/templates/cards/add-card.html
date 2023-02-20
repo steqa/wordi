@@ -151,8 +151,10 @@
             </div>
         </div>
         <div class="d-grid my-4">
-            <a href="{% url 'add-card' %}" class="btn btn-primary">Создать</a>
+            <button class="btn btn-primary" type="submit" id="createCardBtn">Создать</button>
         </div>
     </div>
+    <script src="{% static 'js/get-cookie.js' %}"></script>
     <script src="{% static 'js/add-card/placeholder.js' %}"></script>
+    <script src="{% static 'js/add-card/send-data.js' %}"></script>
 {% endblock %}
