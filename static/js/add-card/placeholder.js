@@ -50,7 +50,16 @@ function changeTextPlaceholder(input) {
 	if (input.value != '') {
 		placeholderTextHide.style.display = 'none';
 		placeholderTextShow.style.display = 'flex';
-		placeholderTextShow.innerHTML = input.value;
+		const value = input.value.split('\n');
+		innerValue = '';
+		value.forEach((v) => {
+			if (v === '') {
+				innerValue += `&nbsp;<br>`;
+			} else {
+				innerValue += `${v}<br>`;
+			}
+		});
+		placeholderTextShow.innerHTML = innerValue;
 	} else {
 		placeholderTextHide.style.display = 'flex';
 		placeholderTextShow.style.display = 'none';
