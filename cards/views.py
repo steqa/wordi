@@ -11,3 +11,7 @@ def cards(request):
         'cards_images': cards_images,
     }
     return render(request, 'cards/cards.html', context)
+
+
+def add_card(request):
+    return render(request, 'cards/add-card.html')

@@ -4,7 +4,7 @@
 {% block content %}
     <div class="container">
         <div class="d-grid my-4">
-            <button class="btn btn-outline-primary" type="button">Создать карточку</button>
+            <a href="{% url 'add-card' %}" class="btn btn-outline-primary">Создать карточку</a>
         </div>
         {% if request.user.is_authenticated %}
             {% for card in cards %}

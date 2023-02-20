@@ -1,0 +1,158 @@
+{% extends 'cards/base.html' %}
+{% load static %}
+{% block title %}Добавить карточку{% endblock %}
+{% block content %}
+    <div class="container">
+        <h3 class="mt-4 mb-3">Создание карточки</h3>
+        <div class="row">
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="formFrontText" class="form-label">Текст</label>
+                    <textarea class="form-control add-input" id="formFrontText" rows="5"></textarea>
+                </div>
+                <div>
+                    <label for="formFrontImage" class="form-label">Изображение</label>
+                    <input class="form-control add-input" type="file" id="formFrontImage">
+                    <div class="form-text text-end" style="min-height: 21px;">
+                        <span class="form-image-clear-btn"
+                              data-side="front"
+                              style="cursor: pointer;
+                                     display: none">Очистить</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="formBackText" class="form-label">Текст</label>
+                    <textarea class="form-control add-input" id="formBackText" rows="5"></textarea>
+                </div>
+                <div>
+                    <label for="formBackImage" class="form-label">Изображение</label>
+                    <input class="form-control add-input" type="file" id="formBackImage">
+                    <div class="form-text text-end">
+                        <span class="form-image-clear-btn"
+                              data-side="back"
+                              style="cursor: pointer;
+                                     display: none">Очистить</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3 class="mt-2 mb-3">Предпросмотр</h3>
+        <div class="card my-4 bg-body-tertiary placeholder-glow"
+             aria-hidden="true">
+            <div class="card-header d-flex justify-content-end">
+                <button class="icon-btn edit-icon-btn me-2">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="16"
+                         height="16"
+                         fill="currentColor"
+                         class="bi bi-pencil-fill pb-1"
+                         viewBox="0 0 16 16">
+                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                    </svg>
+                </button>
+                <button class="icon-btn remove-icon-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="16"
+                         height="16"
+                         fill="currentColor"
+                         class="bi bi-trash-fill pb-1"
+                         viewBox="0 0 16 16">
+                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="card-body row g-3">
+                <div class="col-6 border-end">
+                    <div class="clearfix">
+                        <div class="card-image float-end">
+                            <div class="ratio">
+                                <div class="ratio-inner ratio-1-1">
+                                    <div class="ratio-content placeholder" id="placeholderFrontImageHide">
+                                        <svg width="100%"
+                                             height="180"
+                                             xmlns="http://www.w3.org/2000/svg"
+                                             role="img"
+                                             aria-label="Placeholder"
+                                             preserveAspectRatio="xMidYMid slice"
+                                             focusable="false">
+                                            <rect width="100%" height="100%" fill="#868e96"></rect>
+                                        </svg>
+                                    </div>
+                                    <div class="ratio-content"
+                                         id="placeholderFrontImageShow"
+                                         style="display: none">
+                                        <div class="img-100"
+                                             style="background-repeat: no-repeat;
+                                                    background-position: center;
+                                                    background-size: cover"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="placeholderFrontTextHide">
+                            <p class="card-text col-12">
+                                <span class="placeholder col-7"></span>
+                                <span class="placeholder col-4"></span>
+                                <span class="placeholder col-4"></span>
+                                <span class="placeholder col-6"></span>
+                                <span class="placeholder col-8"></span>
+                            </p>
+                        </div>
+                        <p class="card-text" id="placeholderFrontTextShow" style="display: none"></p>
+                    </div>
+                </div>
+                <div class="col-6 border-start">
+                    <div class="clearfix">
+                        <div class="card-image float-end">
+                            <div class="ratio">
+                                <div class="ratio-inner ratio-1-1">
+                                    <div class="ratio-content placeholder" id="placeholderBackImageHide">
+                                        <svg width="100%"
+                                             height="180"
+                                             xmlns="http://www.w3.org/2000/svg"
+                                             role="img"
+                                             aria-label="Placeholder"
+                                             preserveAspectRatio="xMidYMid slice"
+                                             focusable="false">
+                                            <rect width="100%" height="100%" fill="#868e96"></rect>
+                                        </svg>
+                                    </div>
+                                    <div class="ratio-content"
+                                         id="placeholderBackImageShow"
+                                         style="display: none">
+                                        <div class="img-100"
+                                             style="background-repeat: no-repeat;
+                                                    background-position: center;
+                                                    background-size: cover"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="placeholderBackTextHide">
+                            <p class="card-text col-12">
+                                <span class="placeholder col-7"></span>
+                                <span class="placeholder col-4"></span>
+                                <span class="placeholder col-4"></span>
+                                <span class="placeholder col-6"></span>
+                                <span class="placeholder col-8"></span>
+                            </p>
+                        </div>
+                        <p class="card-text" id="placeholderBackTextShow" style="display: none"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row text-center">
+                    <span class="col-6">Передняя сторона</span>
+                    <span class="col-6">Задняя сторона</span>
+                </div>
+            </div>
+        </div>
+        <div class="d-grid my-4">
+            <a href="{% url 'add-card' %}" class="btn btn-primary">Создать</a>
+        </div>
+    </div>
+    <script src="{% static 'js/add-card/placeholder.js' %}"></script>
+{% endblock %}
