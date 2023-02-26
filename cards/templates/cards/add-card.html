@@ -2,39 +2,44 @@
 {% load static %}
 {% block title %}Добавить карточку{% endblock %}
 {% block content %}
+    <link rel="stylesheet" href="{% static 'css/cards/add-card.css' %}">
     <div class="container">
         <h3 class="mt-4 mb-3">Создание карточки</h3>
         <div class="row">
             <div class="col-6">
-                <div class="mb-3">
+                <div>
                     <label for="formFrontText" class="form-label">Текст</label>
                     <textarea class="form-control add-input" id="formFrontText" rows="5"></textarea>
+                    <div class="invalid-feedback"></div>
                 </div>
                 <div>
-                    <label for="formFrontImage" class="form-label">Изображение</label>
-                    <input class="form-control add-input" type="file" id="formFrontImage">
-                    <div class="form-text text-end" style="min-height: 21px;">
+                    <div class="d-flex justify-content-between">
+                        <label for="formFrontImage" class="form-label">Изображение</label>
                         <span class="form-image-clear-btn"
                               data-side="front"
                               style="cursor: pointer;
                                      display: none">Очистить</span>
                     </div>
+                    <input class="form-control add-input" type="file" id="formFrontImage">
+                    <div class="invalid-feedback"></div>
                 </div>
             </div>
             <div class="col-6">
-                <div class="mb-3">
+                <div>
                     <label for="formBackText" class="form-label">Текст</label>
                     <textarea class="form-control add-input" id="formBackText" rows="5"></textarea>
+                    <div class="invalid-feedback"></div>
                 </div>
                 <div>
-                    <label for="formBackImage" class="form-label">Изображение</label>
-                    <input class="form-control add-input" type="file" id="formBackImage">
-                    <div class="form-text text-end">
+                    <div class="d-flex justify-content-between">
+                        <label for="formBackImage" class="form-label">Изображение</label>
                         <span class="form-image-clear-btn"
                               data-side="back"
                               style="cursor: pointer;
                                      display: none">Очистить</span>
                     </div>
+                    <input class="form-control add-input" type="file" id="formBackImage">
+                    <div class="invalid-feedback"></div>
                 </div>
             </div>
         </div>
@@ -151,10 +156,13 @@
             </div>
         </div>
         <div class="d-grid my-4">
-            <button class="btn btn-primary" type="submit" id="createCardBtn">Создать</button>
+            <button class="btn btn-primary" type="submit" id="createCardBtn">
+                Создать
+            </button>
         </div>
     </div>
     <script src="{% static 'js/get-cookie.js' %}"></script>
     <script src="{% static 'js/add-card/placeholder.js' %}"></script>
+    <script src="{% static 'js/add-card/form-validation.js' %}"></script>
     <script src="{% static 'js/add-card/send-data.js' %}"></script>
 {% endblock %}
