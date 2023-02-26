@@ -3,6 +3,13 @@ const imageInputs = document.querySelectorAll('.add-input[type="file"]');
 const textInputs = document.querySelectorAll('textarea.add-input');
 
 createCardBtn.addEventListener('click', (e) => {
+	const validationResult = validateFields();
+	if (validationResult) {
+		sendData();
+	}
+});
+
+function sendData() {
 	let formData = new FormData();
 	imageInputs.forEach((input) => {
 		const image = input.files[0];
@@ -31,4 +38,4 @@ createCardBtn.addEventListener('click', (e) => {
 		},
 		body: formData,
 	});
-});
+}

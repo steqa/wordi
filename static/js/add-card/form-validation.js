@@ -2,10 +2,6 @@ const createCardButton = document.getElementById('createCardBtn');
 const textFields = document.querySelectorAll('textarea.add-input');
 const imageFields = document.querySelectorAll('.add-input[type="file"]');
 
-createCardButton.addEventListener('click', (e) => {
-	validateFields();
-});
-
 textFields.forEach((field) => {
 	let time;
 	field.addEventListener('input', (e) => {
@@ -57,6 +53,11 @@ function validateFields() {
 		}
 	});
 	displayFieldsErrors(fieldsErrors);
+	if (Object.keys(fieldsErrors).length > 0) {
+		return false;
+	} else {
+		return true;
+	}
 }
 
 function textFieldValidation(field) {
