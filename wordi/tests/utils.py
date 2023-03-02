@@ -32,3 +32,11 @@ def run_page_context_equal_test(
         with self_.subTest(f'{reverse_name=}, {context_key=}'):
             real_context_value = response.context[context_key][0]
             self_.assertEqual(real_context_value, expected_context_value)
+
+
+def run_data_class_properties_equal_test(
+        data_class, self_, field: str, properties: dict) -> None:
+
+    with self_.subTest(f'{field=}, {properties=}'):
+        real_properties = data_class.schema()['properties'][field]
+        self_.assertEqual(real_properties, properties)

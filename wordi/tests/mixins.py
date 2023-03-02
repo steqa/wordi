@@ -1,4 +1,5 @@
-from .utils import (run_field_parameter_equal_test,
+from .utils import (run_data_class_properties_equal_test,
+                    run_field_parameter_equal_test,
                     run_page_context_equal_test, run_page_template_equal_test)
 
 
@@ -20,10 +21,19 @@ class TestPagesUsesCorrectTemplateMixin:
             )
 
 
-class TestPagesShowCorrectContext:
+class TestPagesShowCorrectContextMixin:
     def run_pages_show_correct_context_test(self):
         for reverse_name, context \
                 in self.pages_and_context_keys_with_values.items():
             run_page_context_equal_test(
                 self, reverse_name, context
+            )
+
+
+class TestDataClassFieldsPropertiesValuesMixin:
+    def run_data_class_fields_properties_values_test(self, data_class):
+        for field, properties \
+                in self.fields_and_properties.items():
+            run_data_class_properties_equal_test(
+                data_class, self, field, properties
             )
