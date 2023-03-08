@@ -14,21 +14,13 @@ function sendData() {
 	imageInputs.forEach((input) => {
 		const image = input.files[0];
 		if (image) {
-			if (input.id === 'formFrontImage') {
-				formData.append('front_image', image);
-			} else if (input.id === 'formBackImage') {
-				formData.append('back_image', image);
-			}
+			formData.append(input.id, image);
 		}
 	});
 	textInputs.forEach((input) => {
 		const value = input.value;
 		if (value) {
-			if (input.id === 'formFrontText') {
-				formData.append('front_text', value);
-			} else if (input.id === 'formBackText') {
-				formData.append('back_text', value);
-			}
+			formData.append(input.id, value);
 		}
 	});
 	fetch(window.location.href, {
