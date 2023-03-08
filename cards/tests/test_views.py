@@ -3,13 +3,14 @@ from django.test import Client, TestCase
 from django.urls import reverse
 
 from cards.models import Card, CardImages
-from wordi.tests.mixins import (TestPagesShowCorrectContext,
+from wordi.tests.mixins import (TestPagesShowCorrectContextMixin,
                                 TestPagesUsesCorrectTemplateMixin)
 
 User = get_user_model()
 
 
-class CardsPagesTests(TestCase, TestPagesUsesCorrectTemplateMixin, TestPagesShowCorrectContext):
+class CardsPagesTests(TestCase, TestPagesUsesCorrectTemplateMixin,
+                      TestPagesShowCorrectContextMixin):
     @classmethod
     def setUpTestData(cls):
         cls.user = User.objects.create(
@@ -30,6 +31,7 @@ class CardsPagesTests(TestCase, TestPagesUsesCorrectTemplateMixin, TestPagesShow
         cls.authorized_client.force_login(cls.user)
         cls.templates_pages_names = {
             'cards/cards.html': reverse('cards'),
+            'cards/add-card.html': reverse('add-card'),
         }
         cls.pages_and_context_keys_with_values = {
             'cards': {
