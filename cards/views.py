@@ -1,5 +1,6 @@
 import json
 
+from django.contrib.auth.decorators import login_required
 from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
@@ -10,6 +11,7 @@ from .utils import (create_and_get_card_images_without_save,
                     create_and_get_card_without_save)
 
 
+@login_required
 def cards(request):
     cards = Card.objects.filter(user=request.user.id)
     cards_images = CardImages.objects.filter(card__in=cards)
@@ -20,6 +22,7 @@ def cards(request):
     return render(request, 'cards/cards.html', context)
 
 
+@login_required
 def add_card(request):
     if request.method == 'POST':
         user = request.user
