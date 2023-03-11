@@ -11,6 +11,7 @@ createCardBtn.addEventListener('click', (e) => {
 
 function sendData() {
 	let formData = new FormData();
+	let responseStatus = null;
 	imageInputs.forEach((input) => {
 		const image = input.files[0];
 		if (image) {
@@ -29,5 +30,19 @@ function sendData() {
 			'X-CSRFToken': getCookie('csrftoken'),
 		},
 		body: formData,
-	});
+	})
+		.then((response) => {
+			responseStatus = response.status;
+			return response.json();
+		})
+		.then((data) => {
+			if (responseStatus === 200) {
+				localStorage.setItem('toastStatus', 'success');
+				localStorage.setItem('toastMessage', 'Карточка добавлена.');
+				window.location.replace(JSON.parse(data)['redirectUrl']);
+			} else if (responseStatus === 400) {
+				showToast('error', 'Что-то пошло не так.');
+			}
+		})
+		.catch((error) => console.error(error));
 }
