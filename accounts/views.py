@@ -1,8 +1,8 @@
 import json
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http.response import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse
 from pydantic import ValidationError
 
@@ -36,3 +36,8 @@ def login_user(request):
             return JsonResponse(status=response_status,
                                 data=json.dumps(response_data), safe=False)
     return render(request, 'accounts/login.html')
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('login-user')
