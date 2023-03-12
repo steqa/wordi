@@ -21,6 +21,7 @@ class CardsPagesTests(TestCase, TestPagesUsesCorrectTemplateMixin,
         cls.authorized_client = Client()
         cls.templates_pages_names = {
             'accounts/login.html': reverse('login-user'),
+            'accounts/registration.html': reverse('registration-user'),
         }
 
     def test_pages_uses_correct_template(self):
