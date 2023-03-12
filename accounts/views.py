@@ -7,8 +7,10 @@ from django.urls import reverse
 from pydantic import ValidationError
 
 from .data_classes import UserLoginData
+from .decorators import unauthenticated_user
 
 
+@unauthenticated_user
 def login_user(request):
     if request.method == 'POST':
         input_post_json = json.dumps(request.POST)

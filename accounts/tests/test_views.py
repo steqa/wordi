@@ -19,7 +19,6 @@ class CardsPagesTests(TestCase, TestPagesUsesCorrectTemplateMixin,
             password='test12345',
         )
         cls.authorized_client = Client()
-        cls.authorized_client.force_login(cls.user)
         cls.templates_pages_names = {
             'accounts/login.html': reverse('login-user'),
         }
