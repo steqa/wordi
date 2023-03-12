@@ -16,6 +16,28 @@ def run_field_parameter_equal_test(
                 self_.assertEqual(parameter_real_value, expected_value)
 
 
+def run_form_fields_labels_equal_test(
+        form, self_,
+        field_name: str,
+        expected_label: str) -> None:
+
+    with self_.subTest(f'{field_name=}, {expected_label=}'):
+        field_real_label = form.fields[field_name].label
+
+        self_.assertEqual(field_real_label, expected_label)
+
+
+def run_form_fields_max_length_equal_test(
+        form, self_,
+        field_name: str,
+        expected_max_length: str) -> None:
+
+    with self_.subTest(f'{field_name=}, {expected_max_length=}'):
+        field_real_max_length = form.fields[field_name].max_length
+
+        self_.assertEqual(field_real_max_length, expected_max_length)
+
+
 def run_page_template_equal_test(
         self_, reverse_name: str, expected_template: str) -> None:
 

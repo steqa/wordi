@@ -1,5 +1,7 @@
 from .utils import (run_data_class_properties_equal_test,
                     run_field_parameter_equal_test,
+                    run_form_fields_labels_equal_test,
+                    run_form_fields_max_length_equal_test,
                     run_page_context_equal_test, run_page_template_equal_test)
 
 
@@ -9,6 +11,24 @@ class TestFieldsParametersValuesMixin:
                 self.parameters_and_fields_with_value.items():
             run_field_parameter_equal_test(
                 model, self, fields_and_parameter_value, parameter_name
+            )
+
+
+class TestFormFieldsLabels:
+    def run_form_fields_labels_test(self, form):
+        for field_name, expected_label in \
+                self.fields_with_labels.items():
+            run_form_fields_labels_equal_test(
+                form, self, field_name, expected_label
+            )
+
+
+class TestFormFieldsMaxLength:
+    def run_form_fields_max_length_test(self, form):
+        for field_name, expected_max_length in \
+                self.fields_with_max_length.items():
+            run_form_fields_max_length_equal_test(
+                form, self, field_name, expected_max_length
             )
 
 
