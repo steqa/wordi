@@ -7,13 +7,13 @@ fields.forEach((field) => {
 		clearTimeout(time);
 		time = setTimeout((e) => {
 			if (field.value) {
-				validateield(field);
+				validateField(field);
 			}
 		}, 500);
 	});
 });
 
-function validateield(field) {
+function validateField(field) {
 	let fieldErrors = {};
 	const errors = fieldValidation(field);
 	if (errors) {
