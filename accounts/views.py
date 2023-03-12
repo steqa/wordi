@@ -43,3 +43,7 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return redirect('login-user')
+
+
+def registration_user(request):
+    return render(request, 'accounts/registration.html')
