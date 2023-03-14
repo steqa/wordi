@@ -6,9 +6,11 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from pydantic import ValidationError
 
+from . import constants
 from .data_classes import UserLoginData, UserRegistrationData
 from .decorators import unauthenticated_user
 from .forms import CustomUserCreationForm
+from .threads import DeleteUserAfterTimeElapsed
 from .utils import send_email
 
 
@@ -67,6 +69,8 @@ def registration_user(request):
                 send_email(request, user,
                            email_subject=email_subject,
                            email_template=email_template)
+                DeleteUserAfterTimeElapsed(
+                    user, constants.LIFETIME_EMAIL_USER_ACTIVATION).start()
                 response_status = 200
                 response_data = {
                     'redirectUrl': request.build_absolute_uri(reverse('login-user'))
