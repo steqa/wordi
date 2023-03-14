@@ -30,8 +30,6 @@ function sendData() {
 		})
 		.then((data) => {
 			if (responseStatus === 200) {
-				localStorage.setItem('toastStatus', 'success');
-				localStorage.setItem('toastMessage', 'Вы успешно зарегистрировались.');
 				window.location.replace(JSON.parse(data)['redirectUrl']);
 			} else if (responseStatus === 400) {
 				const errors = JSON.parse(data)['errors'];

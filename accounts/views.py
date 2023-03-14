@@ -1,6 +1,7 @@
 import json
 
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.http.response import JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
@@ -10,6 +11,7 @@ from . import constants
 from .data_classes import UserLoginData, UserRegistrationData
 from .decorators import unauthenticated_user
 from .forms import CustomUserCreationForm
+from .models import User
 from .threads import DeleteUserAfterTimeElapsed
 from .utils import send_email
 
@@ -73,7 +75,8 @@ def registration_user(request):
                     user, constants.LIFETIME_EMAIL_USER_ACTIVATION).start()
                 response_status = 200
                 response_data = {
-                    'redirectUrl': request.build_absolute_uri(reverse('login-user'))
+                    'redirectUrl': request.build_absolute_uri(reverse(
+                        'verification-email', kwargs={'user_pk': user.pk}))
                 }
             else:
                 response_status = 400
@@ -89,3 +92,19 @@ def registration_user(request):
             return JsonResponse(status=response_status,
                                 data=json.dumps(response_data), safe=False)
     return render(request, 'accounts/registration.html')
+
+
+@login_required
+def verification_email(request, user_pk: str):
+    if User.objects.filter(pk=user_pk).exists():
+        user = User.objects.get(pk=user_pk)
+        if not user.is_email_verified:
+            context = {
+                'user': user
+            }
+            return render(request,
+                          'accounts/registration-verification/request.html',
+                          context)
+        return redirect('cards')
+    else:
+        return redirect('cards')

@@ -1,0 +1,21 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block title %}Регистрация{% endblock %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/center.css' %}">
+    <div class="center-outer">
+        <div class="center-middle">
+            <div class="center-inner col-4 mb-5">
+                <h3 class="mb-3">Подтвердите адрес электронной почты!</h3>
+                <p>
+                    Электронное письмо отправлено на адрес
+                    <br>
+                    <span class="text-primary">{{ user.email }}</span>
+                </p>
+                <p>
+                    Если вы не получили письмо, проверьте папку <span class="text-primary">спам</span> или попробуйте зарегистрироваться позже.
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
