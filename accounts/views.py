@@ -13,7 +13,8 @@ from .decorators import unauthenticated_user
 from .forms import CustomUserCreationForm
 from .models import User
 from .threads import DeleteUserAfterTimeElapsed
-from .utils import send_email
+from .tokens import email_token
+from .utils import get_user_by_uidb64, send_email
 
 
 @unauthenticated_user
@@ -108,3 +109,18 @@ def verification_email(request, user_pk: str):
         return redirect('cards')
     else:
         return redirect('cards')
+
+
+@unauthenticated_user
+def activate_user(request, uidb64: str, token: str):
+    user = get_user_by_uidb64(uidb64)
+    if (user is not None
+        and email_token.check_token(
+            user, token, constants.LIFETIME_EMAIL_USER_ACTIVATION)
+            and not user.is_email_verified):
+        user.is_email_verified = True
+        user.save()
+        return redirect('login-user')
+    else:
+        return render(request,
+                      'accounts/registration-verification/fail.html')
