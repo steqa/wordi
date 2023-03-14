@@ -9,6 +9,7 @@ from pydantic import ValidationError
 from .data_classes import UserLoginData, UserRegistrationData
 from .decorators import unauthenticated_user
 from .forms import CustomUserCreationForm
+from .utils import send_email
 
 
 @unauthenticated_user
@@ -60,7 +61,12 @@ def registration_user(request):
             user_data = UserRegistrationData.parse_raw(input_post_json)
             form_data = CustomUserCreationForm(user_data.dict())
             if form_data.is_valid():
-                form_data.save()
+                user = form_data.save()
+                email_subject = 'sauto: подтверждение адреса электронной почты'
+                email_template = 'accounts/registration-verification/email.html'
+                send_email(request, user,
+                           email_subject=email_subject,
+                           email_template=email_template)
                 response_status = 200
                 response_data = {
                     'redirectUrl': request.build_absolute_uri(reverse('login-user'))
