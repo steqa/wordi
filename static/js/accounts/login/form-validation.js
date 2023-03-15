@@ -7,20 +7,17 @@ fields.forEach((field) => {
 		clearTimeout(time);
 		time = setTimeout((e) => {
 			if (field.value) {
-				validateField(field);
+				if (field.id === 'formEmail') {
+					validateEmail(field);
+				} else if (field.id === 'formPassword') {
+					validatePassword(field);
+				}
+			} else {
+				displayFieldErrors(field);
 			}
 		}, 500);
 	});
 });
-
-function validateField(field) {
-	let fieldErrors = {};
-	const errors = fieldValidation(field);
-	if (errors) {
-		fieldErrors[field.id] = errors;
-	}
-	displayFieldErrors(field, fieldErrors);
-}
 
 function validateFields() {
 	let fieldsErrors = {};
@@ -38,35 +35,32 @@ function validateFields() {
 	}
 }
 
-function fieldValidation(field) {
+function validatePassword(field) {
+	let fieldErrors = {};
+	const errors = passwordValidation(field);
+	if (errors) {
+		fieldErrors[field.id] = errors;
+	}
+	displayFieldErrors(field, fieldErrors);
+}
+
+function passwordValidation(field) {
 	const value = field.value;
 	let errors = [];
 	if (typeof value === 'undefined' || value === '' || value === null) {
 		errors.push('Обязательное поле.');
+	} else {
+		if (value.length < 8) {
+			errors.push(
+				'Введённый пароль слишком короткий. Он должен содержать как минимум 8 символов.'
+			);
+		}
+		if (/^[0-9]+$/.test(value)) {
+			errors.push('Введённый пароль состоит только из цифр.');
+		}
 	}
 	if (errors.length < 1) {
 		return false;
 	}
 	return errors;
-}
-
-function displayFieldsErrors(fieldsErrors) {
-	fields.forEach((field) => {
-		displayFieldErrors(field, fieldsErrors);
-	});
-}
-
-function displayFieldErrors(field, errors) {
-	const feedbackBlock = field.parentNode.querySelector('.invalid-feedback');
-	if (Object.keys(errors).includes(field.id)) {
-		field.classList.add('is-invalid');
-		let innerValue = '';
-		errors[field.id].forEach((error) => {
-			innerValue += `<span>${error}</span><br>`;
-		});
-		feedbackBlock.innerHTML = innerValue;
-	} else {
-		field.classList.remove('is-invalid');
-		feedbackBlock.innerHTML = '';
-	}
 }

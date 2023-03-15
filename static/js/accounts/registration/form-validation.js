@@ -24,22 +24,37 @@ fields.forEach((field) => {
 	});
 });
 
-function validateField(field) {
-	let fieldErrors = {};
-	const errors = fieldValidation(field);
-	if (errors) {
-		fieldErrors[field.id] = errors;
+function validateFields() {
+	let fieldsErrors = {};
+	fields.forEach((field) => {
+		if (field.id === 'formEmail') {
+			const error = emailValidation(field);
+			if (error) {
+				fieldsErrors[field.id] = error;
+			}
+		} else if (field.id === 'formPassword1') {
+			const error = passwordValidation(field);
+			if (error) {
+				fieldsErrors[field.id] = error;
+			}
+		} else if (field.id === 'formPassword2') {
+			const error = secondPasswordValidation(field);
+			if (error) {
+				fieldsErrors[field.id] = error;
+			}
+		} else {
+			const error = fieldValidation(field);
+			if (error) {
+				fieldsErrors[field.id] = error;
+			}
+		}
+	});
+	displayFieldsErrors(fieldsErrors);
+	if (Object.keys(fieldsErrors).length > 0 || !validatePasswordsMatch()) {
+		return false;
+	} else {
+		return true;
 	}
-	displayFieldErrors(field, fieldErrors);
-}
-
-function validateEmail(field) {
-	let fieldErrors = {};
-	const errors = emailValidation(field);
-	if (errors) {
-		fieldErrors[field.id] = errors;
-	}
-	displayFieldErrors(field, fieldErrors);
 }
 
 function validatePassword(field) {
@@ -74,69 +89,6 @@ function validatePasswordsMatch() {
 			return false;
 		}
 	}
-}
-
-function validateFields() {
-	let fieldsErrors = {};
-	fields.forEach((field) => {
-		if (field.id === 'formEmail') {
-			const error = emailValidation(field);
-			if (error) {
-				fieldsErrors[field.id] = error;
-			}
-		} else if (field.id === 'formPassword1') {
-			const error = passwordValidation(field);
-			if (error) {
-				fieldsErrors[field.id] = error;
-			}
-		} else if (field.id === 'formPassword2') {
-			const error = secondPasswordValidation(field);
-			if (error) {
-				fieldsErrors[field.id] = error;
-			}
-		} else {
-			const error = fieldValidation(field);
-			if (error) {
-				fieldsErrors[field.id] = error;
-			}
-		}
-	});
-	displayFieldsErrors(fieldsErrors);
-	if (Object.keys(fieldsErrors).length > 0 || !validatePasswordsMatch()) {
-		return false;
-	} else {
-		return true;
-	}
-}
-
-function fieldValidation(field) {
-	const value = field.value;
-	let errors = [];
-	if (typeof value === 'undefined' || value === '' || value === null) {
-		errors.push('Обязательное поле.');
-	}
-	if (errors.length < 1) {
-		return false;
-	}
-	return errors;
-}
-
-function emailValidation(field) {
-	const value = field.value;
-	let errors = [];
-	if (typeof value === 'undefined' || value === '' || value === null) {
-		errors.push('Обязательное поле.');
-	} else {
-		const validRegex =
-			/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-		if (!value.match(validRegex)) {
-			errors.push('Введите правильный адрес электронной почты.');
-		}
-	}
-	if (errors.length < 1) {
-		return false;
-	}
-	return errors;
 }
 
 function passwordValidation(field) {
@@ -177,25 +129,4 @@ function secondPasswordValidation(field) {
 		return false;
 	}
 	return errors;
-}
-
-function displayFieldsErrors(fieldsErrors) {
-	fields.forEach((field) => {
-		displayFieldErrors(field, fieldsErrors);
-	});
-}
-
-function displayFieldErrors(field, errors = {}) {
-	const feedbackBlock = field.parentNode.querySelector('.invalid-feedback');
-	if (Object.keys(errors).includes(field.id)) {
-		field.classList.add('is-invalid');
-		let innerValue = '';
-		errors[field.id].forEach((error) => {
-			innerValue += `<span>${error}</span><br>`;
-		});
-		feedbackBlock.innerHTML = innerValue;
-	} else {
-		field.classList.remove('is-invalid');
-		feedbackBlock.innerHTML = '';
-	}
 }
