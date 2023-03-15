@@ -22,9 +22,16 @@ fields.forEach((field) => {
 function validateFields() {
 	let fieldsErrors = {};
 	fields.forEach((field) => {
-		const error = fieldValidation(field);
-		if (error) {
-			fieldsErrors[field.id] = error;
+		if (field.id === 'formEmail') {
+			const error = emailValidation(field);
+			if (error) {
+				fieldsErrors[field.id] = error;
+			}
+		} else if (field.id === 'formPassword1') {
+			const error = passwordValidation(field);
+			if (error) {
+				fieldsErrors[field.id] = error;
+			}
 		}
 	});
 	displayFieldsErrors(fieldsErrors);
