@@ -21,27 +21,29 @@ class UserAdmin(UserAdmin):
         ('Персональная информация',
             {'fields': (
                 'first_name',
-                'last_name',
+                'last_name'
             )}),
         ('Права доступа',
             {'fields': (
                 'is_staff',
                 'is_admin',
                 'is_superuser',
-                'is_email_verified',
+                'is_email_verified'
             )}),
         ('Важные даты',
             {'fields': (
                 readonly_fields[1],
                 readonly_fields[2],
-                readonly_fields[3],
-            )}),
+                readonly_fields[3]
+            )})
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'first_name', 'last_name', 'password1', 'password2'),
-        }),
+            'fields': ('email',
+                       'first_name', 'last_name',
+                       'password1', 'password2')
+        })
     )
     ordering = ()
     filter_horizontal = ()

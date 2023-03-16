@@ -25,10 +25,10 @@ function sendData() {
 		})
 		.then((data) => {
 			if (responseStatus === 200) {
-				const renderTemplate = JSON.parse(data)['renderTemplate'];
+				const renderTemplate = data['renderTemplate'];
 				document.querySelector('.content-block').innerHTML = renderTemplate;
 			} else if (responseStatus === 400) {
-				const msg = JSON.parse(data)['msg'];
+				const msg = data['msg'];
 				if (msg) {
 					showToast('error', msg);
 				} else {

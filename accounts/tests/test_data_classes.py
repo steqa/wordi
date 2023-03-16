@@ -12,12 +12,12 @@ class UserLoginDataTests(TestCase, TestDataClassFieldsPropertiesValuesMixin):
             'formEmail': {
                 'title': 'Formemail',
                 'minLength': 1,
-                'type': 'string',
+                'type': 'string'
             },
             'formPassword': {
                 'title': 'Formpassword',
                 'minLength': 1,
-                'type': 'string',
+                'type': 'string'
             }
         }
 
@@ -25,39 +25,41 @@ class UserLoginDataTests(TestCase, TestDataClassFieldsPropertiesValuesMixin):
         super().run_data_class_fields_properties_values_test(UserLoginData)
 
 
-class UserRegistrationDataTests(TestCase, TestDataClassFieldsPropertiesValuesMixin):
+class UserRegistrationDataTests(
+        TestCase, TestDataClassFieldsPropertiesValuesMixin):
     @classmethod
     def setUpTestData(cls):
         cls.fields_and_properties = {
             'formEmail': {
                 'title': 'Formemail',
                 'minLength': 1,
-                'type': 'string',
+                'type': 'string'
             },
             'formFirstName': {
                 'title': 'Formfirstname',
                 'minLength': 1,
-                'type': 'string',
+                'type': 'string'
             },
             'formLastName': {
                 'title': 'Formlastname',
                 'minLength': 1,
-                'type': 'string',
+                'type': 'string'
             },
             'formPassword1': {
                 'title': 'Formpassword1',
                 'minLength': 1,
-                'type': 'string',
+                'type': 'string'
             },
             'formPassword2': {
                 'title': 'Formpassword2',
                 'minLength': 1,
-                'type': 'string',
+                'type': 'string'
             }
         }
 
     def test_properties(self):
-        super().run_data_class_fields_properties_values_test(UserRegistrationData)
+        super().run_data_class_fields_properties_values_test(
+            UserRegistrationData)
 
 
 class EmailDataTests(TestCase, TestDataClassFieldsPropertiesValuesMixin):
@@ -67,7 +69,7 @@ class EmailDataTests(TestCase, TestDataClassFieldsPropertiesValuesMixin):
             'formEmail': {
                 'title': 'Formemail',
                 'minLength': 1,
-                'type': 'string',
+                'type': 'string'
             }
         }
 
@@ -75,21 +77,23 @@ class EmailDataTests(TestCase, TestDataClassFieldsPropertiesValuesMixin):
         super().run_data_class_fields_properties_values_test(EmailData)
 
 
-class UserResetPasswordDataTests(TestCase, TestDataClassFieldsPropertiesValuesMixin):
+class UserResetPasswordDataTests(
+        TestCase, TestDataClassFieldsPropertiesValuesMixin):
     @classmethod
     def setUpTestData(cls):
         cls.fields_and_properties = {
             'formNewPassword1': {
                 'title': 'Formnewpassword1',
                 'minLength': 1,
-                'type': 'string',
+                'type': 'string'
             },
             'formNewPassword2': {
                 'title': 'Formnewpassword2',
                 'minLength': 1,
-                'type': 'string',
+                'type': 'string'
             }
         }
 
     def test_properties(self):
-        super().run_data_class_fields_properties_values_test(UserResetPasswordData)
+        super().run_data_class_fields_properties_values_test(
+            UserResetPasswordData)

@@ -30,10 +30,10 @@ function sendData() {
 		})
 		.then((data) => {
 			if (responseStatus === 200) {
-				const renderTemplate = JSON.parse(data)['renderTemplate'];
+				const renderTemplate = data['renderTemplate'];
 				document.querySelector('.content-block').innerHTML = renderTemplate;
 			} else if (responseStatus === 400) {
-				const errors = JSON.parse(data)['errors'];
+				const errors = data['errors'];
 				if (errors) {
 					const fieldsWithErrors = JSON.parse(errors);
 					let fieldsErrors = {};

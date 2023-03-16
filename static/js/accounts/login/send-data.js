@@ -32,9 +32,9 @@ function sendData() {
 			if (responseStatus === 200) {
 				localStorage.setItem('toastStatus', 'success');
 				localStorage.setItem('toastMessage', 'Добро пожаловать.');
-				window.location.replace(JSON.parse(data)['redirectUrl']);
+				window.location.replace(data['redirectUrl']);
 			} else if (responseStatus === 400) {
-				const msg = JSON.parse(data)['msg'];
+				const msg = data['msg'];
 				if (msg) {
 					showToast('error', msg);
 				} else {

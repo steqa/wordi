@@ -1,9 +1,7 @@
-from django.contrib.auth import get_user_model
 from django.test import TestCase
 
+from accounts.models import User
 from wordi.tests.mixins import TestFieldsParametersValuesMixin
-
-User = get_user_model()
 
 
 class UserTests(TestCase, TestFieldsParametersValuesMixin):
@@ -13,7 +11,7 @@ class UserTests(TestCase, TestFieldsParametersValuesMixin):
             email='test@gmail.com',
             first_name='Имя',
             last_name='Фамилия',
-            password='test12345',
+            password='test12345'
         )
         cls.parameters_and_fields_with_value = {
             'verbose_name': {
@@ -26,28 +24,28 @@ class UserTests(TestCase, TestFieldsParametersValuesMixin):
                 'is_admin': 'статус администратора',
                 'is_superuser': 'статус суперпользователя',
                 'is_email_verified': 'статус проверенной электронной почты',
-                'last_password_update': 'дата последнего обновления пароля',
+                'last_password_update': 'дата последнего обновления пароля'
             },
             'default': {
                 'is_staff': False,
                 'is_admin': False,
                 'is_superuser': False,
-                'is_email_verified': False,
+                'is_email_verified': False
             },
             'max_length': {
                 'email': 260,
                 'first_name': 150,
-                'last_name': 150,
+                'last_name': 150
             },
             'auto_now': {
                 'last_login': True,
-                'last_password_update': True,
+                'last_password_update': True
             },
             'auto_now_add': {
-                'date_joined': True,
+                'date_joined': True
             },
             'unique': {
-                'email': True,
+                'email': True
             }
         }
 
