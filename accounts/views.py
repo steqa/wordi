@@ -1,11 +1,10 @@
 import json
 
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
 from django.http.response import JsonResponse
 from django.shortcuts import redirect, render
+from django.template.loader import render_to_string
 from django.urls import reverse
-from pydantic import ValidationError
 
 from . import constants
 from .data_classes import UserLoginData, UserRegistrationData
@@ -53,7 +52,7 @@ def registration_user(request):
         form_data = CustomUserCreationForm(user_data.dict())
         if form_data.is_valid():
             user = form_data.save()
-            email_subject = 'sauto: подтверждение адреса электронной почты'
+            email_subject = 'Wordi: подтверждение адреса электронной почты'
             email_template = 'accounts/registration-verification/email.html'
             send_email(request, user,
                        email_subject=email_subject,
@@ -61,10 +60,11 @@ def registration_user(request):
             DeleteUserAfterTimeElapsed(
                 user, constants.LIFETIME_EMAIL_USER_ACTIVATION).start()
             response_status = 200
-            response_data = {
-                'redirectUrl': request.build_absolute_uri(reverse(
-                    'verification-email', kwargs={'user_pk': user.pk}))
-            }
+            template = render_to_string(
+                request=request, context={'user': user},
+                template_name='accounts/registration-verification/request.html'
+            )
+            response_data = {'renderTemplate': template}
         else:
             response_status = 400
             response_data = {
@@ -79,22 +79,6 @@ def registration_user(request):
         return JsonResponse(status=response_status,
                             data=json.dumps(response_data), safe=False)
     return render(request, 'accounts/registration.html')
-
-
-@login_required
-def verification_email(request, user_pk: str):
-    if User.objects.filter(pk=user_pk).exists():
-        user = User.objects.get(pk=user_pk)
-        if not user.is_email_verified:
-            context = {
-                'user': user
-            }
-            return render(request,
-                          'accounts/registration-verification/request.html',
-                          context)
-        return redirect('cards')
-    else:
-        return redirect('cards')
 
 
 @unauthenticated_user

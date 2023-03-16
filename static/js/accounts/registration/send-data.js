@@ -30,7 +30,8 @@ function sendData() {
 		})
 		.then((data) => {
 			if (responseStatus === 200) {
-				window.location.replace(JSON.parse(data)['redirectUrl']);
+				const renderTemplate = JSON.parse(data)['renderTemplate'];
+				document.querySelector('.content-block').innerHTML = renderTemplate;
 			} else if (responseStatus === 400) {
 				const errors = JSON.parse(data)['errors'];
 				if (errors) {
