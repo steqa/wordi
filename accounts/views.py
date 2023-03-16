@@ -7,9 +7,11 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 
 from . import constants
-from .data_classes import EmailData, UserLoginData, UserRegistrationData
+from .data_classes import (EmailData, UserLoginData, UserRegistrationData,
+                           UserResetPasswordData)
 from .decorators import unauthenticated_user
-from .forms import CustomUserCreationForm, PasswordResetForm
+from .forms import (CustomSetPasswordForm, CustomUserCreationForm,
+                    PasswordResetForm)
 from .models import User
 from .threads import DeleteUserAfterTimeElapsed
 from .tokens import email_token
@@ -130,3 +132,34 @@ def reset_password(request):
         return JsonResponse(status=response_status,
                             data=json.dumps(response_data), safe=False)
     return render(request, 'accounts/reset-password/reset-password.html')
+
+
+@unauthenticated_user
+def reset_password_confirm(request, uidb64: str, token: str):
+    user = get_user_by_uidb64(uidb64)
+    if (user is not None and
+            email_token.check_token(
+                user, token, constants.LIFETIME_EMAIL_RESET_PASSWORD)):
+        if request.method == 'POST':
+            input_post_json = json.dumps(request.POST)
+            data = UserResetPasswordData.parse_raw(input_post_json)
+            form_data = CustomSetPasswordForm(user, data.dict())
+            if form_data.is_valid():
+                form_data.save()
+                response_status = 200
+                response_data = {
+                    'redirectUrl': request.build_absolute_uri(reverse('login-user'))
+                }
+            else:
+                response_status = 400
+                response_data = {
+                    'errors': form_data.errors.as_json().replace(
+                        'new_password1', 'formNewPassword1').replace(
+                        'new_password2', 'formNewPassword2')
+                }
+            return JsonResponse(status=response_status,
+                                data=json.dumps(response_data), safe=False)
+
+        return render(request, 'accounts/reset-password/confirm.html')
+    else:
+        return render(request, 'accounts/reset-password/fail.html', {'user': user})

@@ -30,3 +30,12 @@ class CustomPasswordResetForm(PasswordResetForm):
     email = forms.EmailField(
         label='Адрес электронной почты',
         max_length=260)
+
+
+class CustomSetPasswordForm(SetPasswordForm):
+    new_password1 = forms.CharField(
+        label='Новый пароль',
+        strip=False)
+    new_password2 = forms.CharField(
+        label='Подтверждение нового пароля',
+        strip=False)

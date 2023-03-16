@@ -1,7 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from accounts.forms import CustomPasswordResetForm, CustomUserCreationForm
+from accounts.forms import (CustomPasswordResetForm, CustomSetPasswordForm,
+                            CustomUserCreationForm)
 from wordi.tests.mixins import TestFormFieldsLabels, TestFormFieldsMaxLength
 
 User = get_user_model()
@@ -51,3 +52,23 @@ class CustomPasswordResetFormTests(TestCase, TestFormFieldsLabels,
     def test_form_fields_max_length(self):
         form = CustomPasswordResetForm()
         super().run_form_fields_max_length_test(form)
+
+
+class CustomSetPasswordFormTests(TestCase, TestFormFieldsLabels,
+                                 TestFormFieldsMaxLength):
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = User.objects.create(
+            email='test@gmail.com',
+            first_name='Имя',
+            last_name='Фамилия',
+            password='test12345',
+        )
+        cls.fields_with_labels = {
+            'new_password1': 'Новый пароль',
+            'new_password2': 'Подтверждение нового пароля',
+        }
+
+    def test_form_fields_labels(self):
+        form = CustomSetPasswordForm(self.user)
+        super().run_form_fields_labels_test(form)

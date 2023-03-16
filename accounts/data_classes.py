@@ -16,3 +16,8 @@ class UserRegistrationData(BaseModel):
 
 class EmailData(BaseModel):
     email: None | str = Field(alias='formEmail', min_length=1)
+
+
+class UserResetPasswordData(BaseModel):
+    new_password1: None | str = Field(alias='formNewPassword1', min_length=1)
+    new_password2: None | str = Field(alias='formNewPassword2', min_length=1)

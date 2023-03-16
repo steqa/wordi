@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from accounts.data_classes import (EmailData, UserLoginData,
-                                   UserRegistrationData)
+                                   UserRegistrationData, UserResetPasswordData)
 from wordi.tests.mixins import TestDataClassFieldsPropertiesValuesMixin
 
 
@@ -73,3 +73,23 @@ class EmailDataTests(TestCase, TestDataClassFieldsPropertiesValuesMixin):
 
     def test_properties(self):
         super().run_data_class_fields_properties_values_test(EmailData)
+
+
+class UserResetPasswordDataTests(TestCase, TestDataClassFieldsPropertiesValuesMixin):
+    @classmethod
+    def setUpTestData(cls):
+        cls.fields_and_properties = {
+            'formNewPassword1': {
+                'title': 'Formnewpassword1',
+                'minLength': 1,
+                'type': 'string',
+            },
+            'formNewPassword2': {
+                'title': 'Formnewpassword2',
+                'minLength': 1,
+                'type': 'string',
+            }
+        }
+
+    def test_properties(self):
+        super().run_data_class_fields_properties_values_test(UserResetPasswordData)
