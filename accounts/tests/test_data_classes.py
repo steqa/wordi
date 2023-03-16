@@ -1,6 +1,7 @@
 from django.test import TestCase
 
-from accounts.data_classes import UserLoginData, UserRegistrationData
+from accounts.data_classes import (EmailData, UserLoginData,
+                                   UserRegistrationData)
 from wordi.tests.mixins import TestDataClassFieldsPropertiesValuesMixin
 
 
@@ -57,3 +58,18 @@ class UserRegistrationDataTests(TestCase, TestDataClassFieldsPropertiesValuesMix
 
     def test_properties(self):
         super().run_data_class_fields_properties_values_test(UserRegistrationData)
+
+
+class EmailDataTests(TestCase, TestDataClassFieldsPropertiesValuesMixin):
+    @classmethod
+    def setUpTestData(cls):
+        cls.fields_and_properties = {
+            'formEmail': {
+                'title': 'Formemail',
+                'minLength': 1,
+                'type': 'string',
+            }
+        }
+
+    def test_properties(self):
+        super().run_data_class_fields_properties_values_test(EmailData)

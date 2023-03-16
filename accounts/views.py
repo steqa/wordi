@@ -7,9 +7,10 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 
 from . import constants
-from .data_classes import UserLoginData, UserRegistrationData
+from .data_classes import EmailData, UserLoginData, UserRegistrationData
 from .decorators import unauthenticated_user
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, PasswordResetForm
+from .models import User
 from .threads import DeleteUserAfterTimeElapsed
 from .tokens import email_token
 from .utils import get_user_by_uidb64, send_email
@@ -97,4 +98,35 @@ def activate_user(request, uidb64: str, token: str):
 
 @unauthenticated_user
 def reset_password(request):
+    if request.method == 'POST':
+        input_post_json = json.dumps(request.POST)
+        email_data = EmailData.parse_raw(input_post_json)
+        form_data = PasswordResetForm(email_data.dict())
+        if form_data.is_valid():
+            user = User.objects.filter(email=email_data.email).first()
+            if user is not None:
+                email_subject = 'Wordi: восстановление пароля'
+                email_template = 'accounts/reset-password/email.html'
+                send_email(request, user,
+                           email_subject=email_subject,
+                           email_template=email_template)
+                response_status = 200
+                template = render_to_string(
+                    request=request, context={'user': user},
+                    template_name='accounts/reset-password/request.html'
+                )
+                response_data = {'renderTemplate': template}
+            else:
+                response_status = 400
+                response_data = {
+                    'msg': 'Пользователь с таким адресом электронной почты не найден.'
+                }
+        else:
+            response_status = 400
+            response_data = {
+                'errors': form_data.errors.as_json().replace(
+                    'email', 'formEmail')
+            }
+        return JsonResponse(status=response_status,
+                            data=json.dumps(response_data), safe=False)
     return render(request, 'accounts/reset-password/reset-password.html')

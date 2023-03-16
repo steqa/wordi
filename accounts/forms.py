@@ -1,5 +1,6 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import (PasswordResetForm, SetPasswordForm,
+                                       UserCreationForm)
 
 from .models import User
 
@@ -23,3 +24,9 @@ class CustomUserCreationForm(UserCreationForm):
         model = User
         fields = ('email', 'first_name', 'last_name', 'password1', 'password2')
         field_classes = {}
+
+
+class CustomPasswordResetForm(PasswordResetForm):
+    email = forms.EmailField(
+        label='Адрес электронной почты',
+        max_length=260)

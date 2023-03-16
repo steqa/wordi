@@ -56,7 +56,9 @@
                 </div>
             </div>
         </div>
-        {% block content %}{% endblock %}
+        <div class="content-block">
+            {% block content %}{% endblock %}
+        </div>
         <script src="{% static 'js/toast.js' %}"></script>
     </body>
 </html>
