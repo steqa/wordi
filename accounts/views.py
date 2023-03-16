@@ -10,7 +10,6 @@ from . import constants
 from .data_classes import UserLoginData, UserRegistrationData
 from .decorators import unauthenticated_user
 from .forms import CustomUserCreationForm
-from .models import User
 from .threads import DeleteUserAfterTimeElapsed
 from .tokens import email_token
 from .utils import get_user_by_uidb64, send_email
@@ -94,3 +93,8 @@ def activate_user(request, uidb64: str, token: str):
     else:
         return render(request,
                       'accounts/registration-verification/fail.html')
+
+
+@unauthenticated_user
+def reset_password(request):
+    return render(request, 'accounts/reset-password/reset-password.html')
