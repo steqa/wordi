@@ -1,0 +1,127 @@
+{% extends 'cards/base.html' %}
+{% load static %}
+{% block title %}Настройки профиля{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="container">
+            <h3 class="mt-4 mb-3">Настройки</h3>
+            <div class="row px-1 py-2 m-0 rounded">
+                <div class="col-sm-2 d-flex align-items-center">
+                    <label for="formEmail" class="form-label text-light m-0">Email</label>
+                </div>
+                <div class="col-sm-10 m-0 p-0 row" data-edit-block>
+                    <div class="col-sm-8 col-10">
+                        <input class="form-control-plaintext" value="{{ user.email }}" readonly>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="col-sm-4 col-2 d-flex align-items-center flex-row-reverse">
+                        <button class="btn btn-transparent" type="button" data-edit-btn>Изменить</button>
+                    </div>
+                </div>
+                <div class="col-sm-10" data-save-block style="display: none;">
+                    <input class="form-control"
+                           type="email"
+                           id="formEmail"
+                           value="{{ user.email }}">
+                    <div class="invalid-feedback"></div>
+                </div>
+            </div>
+            <div class="row px-1 py-2 m-0 rounded">
+                <div class="col-sm-2 d-flex align-items-center">
+                    <label for="formFirstName" class="form-label text-light m-0">Имя</label>
+                </div>
+                <div class="col-sm-10 m-0 p-0 row" data-edit-block>
+                    <div class="col-sm-8 col-10">
+                        <input class="form-control-plaintext" value="{{ user.first_name }}" readonly>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="col-sm-4 col-2 d-flex align-items-center flex-row-reverse">
+                        <button class="btn btn-transparent" type="button" data-edit-btn>Изменить</button>
+                    </div>
+                </div>
+                <div class="col-sm-10" data-save-block style="display: none;">
+                    <input class="form-control"
+                           type="text"
+                           id="formFirstName"
+                           value="{{ user.first_name }}">
+                    <div class="invalid-feedback"></div>
+                </div>
+            </div>
+            <div class="row px-1 py-2 m-0 rounded">
+                <div class="col-sm-2 d-flex align-items-center">
+                    <label for="formLastName" class="form-label text-light m-0">Фамилия</label>
+                </div>
+                <div class="col-sm-10 m-0 p-0 row" data-edit-block>
+                    <div class="col-sm-8 col-10">
+                        <input class="form-control-plaintext" value="{{ user.last_name }}" readonly>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="col-sm-4 col-2 d-flex align-items-center flex-row-reverse">
+                        <button class="btn btn-transparent" type="button" data-edit-btn>Изменить</button>
+                    </div>
+                </div>
+                <div class="col-sm-10" data-save-block style="display: none;">
+                    <input class="form-control"
+                           type="text"
+                           id="formLastName"
+                           value="{{ user.last_name }}">
+                    <div class="invalid-feedback"></div>
+                </div>
+            </div>
+            <div class="row px-1 py-2 m-0 rounded">
+                <div class="col-sm-2 d-flex align-items-center">
+                    <label for="formOldPassword" class="form-label text-light m-0">Пароль</label>
+                </div>
+                <div class="col-sm-10 m-0 p-0 row" data-edit-block>
+                    <div class="col-sm-8 col-10">
+                        <input class="form-control-plaintext"
+                               value="Последнее изменение: 3 дня назад"
+                               readonly>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="col-sm-4 col-2 d-flex align-items-center flex-row-reverse">
+                        <button class="btn btn-transparent" type="button" data-edit-btn>Изменить</button>
+                    </div>
+                </div>
+                <div class="col-sm-10 m-0 p-0 row" data-save-block style="display: none;">
+                    <div class="col-12">
+                        <input class="form-control-plaintext"
+                               value="Последнее изменение: 3 дня назад"
+                               readonly>
+                    </div>
+                    <div class="my-2 col-12">
+                        <input class="form-control"
+                               type="password"
+                               id="formOldPassword"
+                               autocomplete="new-password"
+                               placeholder="Старый пароль">
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="mb-2 col-12">
+                        <input class="form-control"
+                               type="password"
+                               id="formNewPassword1"
+                               autocomplete="new-password"
+                               placeholder="Новый пароль">
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="col-12">
+                        <input class="form-control"
+                               type="password"
+                               id="formNewPassword2"
+                               autocomplete="new-password"
+                               placeholder="Подтверждение нового пароля">
+                        <div class="invalid-feedback"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-grid my-4">
+                <button class="btn btn-primary"
+                        type="submit"
+                        id="saveBtn"
+                        style="display: none">Сохранить изменения</button>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/userprofile/inputs.js' %}"></script>
+{% endblock %}
