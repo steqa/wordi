@@ -18,11 +18,12 @@
                         <button class="btn btn-transparent" type="button" data-edit-btn>Изменить</button>
                     </div>
                 </div>
-                <div class="col-sm-10" data-save-block style="display: none;">
+                <div class="col-sm-10 row" data-save-block style="display: none;">
                     <input class="form-control"
                            type="email"
                            id="formEmail"
-                           value="{{ user.email }}">
+                           value="{{ user.email }}"
+                           style="margin-left: 0.75rem">
                     <div class="invalid-feedback"></div>
                 </div>
             </div>
@@ -39,11 +40,12 @@
                         <button class="btn btn-transparent" type="button" data-edit-btn>Изменить</button>
                     </div>
                 </div>
-                <div class="col-sm-10" data-save-block style="display: none;">
+                <div class="col-sm-10 row" data-save-block style="display: none;">
                     <input class="form-control"
                            type="text"
                            id="formFirstName"
-                           value="{{ user.first_name }}">
+                           value="{{ user.first_name }}"
+                           style="margin-left: 0.75rem">
                     <div class="invalid-feedback"></div>
                 </div>
             </div>
@@ -60,11 +62,12 @@
                         <button class="btn btn-transparent" type="button" data-edit-btn>Изменить</button>
                     </div>
                 </div>
-                <div class="col-sm-10" data-save-block style="display: none;">
+                <div class="col-sm-10 row" data-save-block style="display: none;">
                     <input class="form-control"
                            type="text"
                            id="formLastName"
-                           value="{{ user.last_name }}">
+                           value="{{ user.last_name }}"
+                           style="margin-left: 0.75rem">
                     <div class="invalid-feedback"></div>
                 </div>
             </div>
@@ -89,28 +92,31 @@
                                value="Последнее изменение: 3 дня назад"
                                readonly>
                     </div>
-                    <div class="my-2 col-12">
+                    <div class="my-2 col-12 row">
                         <input class="form-control"
                                type="password"
                                id="formOldPassword"
                                autocomplete="new-password"
-                               placeholder="Старый пароль">
+                               placeholder="Старый пароль"
+                               style="margin-left: 0.75rem">
                         <div class="invalid-feedback"></div>
                     </div>
-                    <div class="mb-2 col-12">
+                    <div class="mb-2 col-12 row">
                         <input class="form-control"
                                type="password"
                                id="formNewPassword1"
                                autocomplete="new-password"
-                               placeholder="Новый пароль">
+                               placeholder="Новый пароль"
+                               style="margin-left: 0.75rem">
                         <div class="invalid-feedback"></div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12 row">
                         <input class="form-control"
                                type="password"
                                id="formNewPassword2"
                                autocomplete="new-password"
-                               placeholder="Подтверждение нового пароля">
+                               placeholder="Подтверждение нового пароля"
+                               style="margin-left: 0.75rem">
                         <div class="invalid-feedback"></div>
                     </div>
                 </div>
@@ -123,5 +129,11 @@
             </div>
         </div>
     </div>
+    <script src="{% static 'js/get-cookie.js' %}"></script>
     <script src="{% static 'js/userprofile/inputs.js' %}"></script>
+    <script src="{% static 'js/accounts/form-validation/display-validation-errors.js' %}"></script>
+    <script src="{% static 'js/accounts/form-validation/email-validation.js' %}"></script>
+    <script src="{% static 'js/accounts/form-validation/field-validation.js' %}"></script>
+    <script src="{% static 'js/userprofile/form-validation.js' %}"></script>
+    <script src="{% static 'js/userprofile/send-data.js' %}"></script>
 {% endblock %}

@@ -1,6 +1,6 @@
 const editBtns = document.querySelectorAll('[data-edit-btn]');
 const saveBtn = document.getElementById('saveBtn');
-const fields = document.querySelectorAll('input.form-control');
+const inputs = document.querySelectorAll('input.form-control');
 
 editBtns.forEach((btn) => {
 	btn.addEventListener('click', (e) => {
@@ -19,8 +19,8 @@ editBtns.forEach((btn) => {
 	});
 });
 
-fields.forEach((field) => {
-	field.addEventListener('input', (e) => {
+inputs.forEach((input) => {
+	input.addEventListener('input', (e) => {
 		saveBtn.style.display = 'block';
 	});
 });
