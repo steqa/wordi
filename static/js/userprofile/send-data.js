@@ -13,7 +13,10 @@ function sendData() {
 	let responseStatus = null;
 	formInputs.forEach((input) => {
 		const value = input.value;
-		if (value) {
+		const defaultValue = document.querySelector(
+			`[data-default-input="${input.dataset.default}"]`
+		).dataset.defaultValue;
+		if (value && value != defaultValue) {
 			formData.append(input.id, value);
 		}
 	});
@@ -29,27 +32,27 @@ function sendData() {
 			return response.json();
 		})
 		.then((data) => {
-			console.log(data);
-			// if (responseStatus === 200) {
-			// 	const renderTemplate = data['renderTemplate'];
-			// 	document.querySelector('.content-block').innerHTML = renderTemplate;
-			// } else if (responseStatus === 400) {
-			// 	const errors = data['errors'];
-			// 	if (errors) {
-			// 		const fieldsWithErrors = JSON.parse(errors);
-			// 		let fieldsErrors = {};
-			// 		for (const [field, errorsArray] of Object.entries(fieldsWithErrors)) {
-			// 			let errors = [];
-			// 			errorsArray.forEach((error) => {
-			// 				errors.push(error['message']);
-			// 			});
-			// 			fieldsErrors[field] = errors;
-			// 		}
-			// 		displayFieldsErrors(fieldsErrors);
-			// 	} else {
-			// 		showToast('error', 'Что-то пошло не так.');
-			// 	}
-			// }
+			if (responseStatus === 200) {
+				localStorage.setItem('toastStatus', 'success');
+				localStorage.setItem('toastMessage', 'Изменения сохранены.');
+				window.location.replace(data['redirectUrl']);
+			} else if (responseStatus === 400) {
+				const errors = data['errors'];
+				if (errors) {
+					const fieldsWithErrors = JSON.parse(errors);
+					let fieldsErrors = {};
+					for (const [field, errorsArray] of Object.entries(fieldsWithErrors)) {
+						let errors = [];
+						errorsArray.forEach((error) => {
+							errors.push(error);
+						});
+						fieldsErrors[field] = errors;
+					}
+					displayFieldsErrors(fieldsErrors);
+				} else {
+					showToast('error', 'Что-то пошло не так.');
+				}
+			}
 		})
 		.catch((error) => console.error(error));
 }

@@ -1,5 +1,6 @@
 {% extends 'cards/base.html' %}
 {% load static %}
+{% load humanize %}
 {% block title %}Настройки профиля{% endblock %}
 {% block content %}
     <div class="container">
@@ -11,7 +12,11 @@
                 </div>
                 <div class="col-sm-10 m-0 p-0 row" data-edit-block>
                     <div class="col-sm-8 col-10">
-                        <input class="form-control-plaintext" value="{{ user.email }}" readonly>
+                        <input class="form-control-plaintext"
+                               value="{{ user.email }}"
+                               readonly
+                               data-default-input="email"
+                               data-default-value="{{ user.email }}">
                         <div class="invalid-feedback"></div>
                     </div>
                     <div class="col-sm-4 col-2 d-flex align-items-center flex-row-reverse">
@@ -23,7 +28,8 @@
                            type="email"
                            id="formEmail"
                            value="{{ user.email }}"
-                           style="margin-left: 0.75rem">
+                           style="margin-left: 0.75rem"
+                           data-default="email">
                     <div class="invalid-feedback"></div>
                 </div>
             </div>
@@ -33,7 +39,11 @@
                 </div>
                 <div class="col-sm-10 m-0 p-0 row" data-edit-block>
                     <div class="col-sm-8 col-10">
-                        <input class="form-control-plaintext" value="{{ user.first_name }}" readonly>
+                        <input class="form-control-plaintext"
+                               value="{{ user.first_name }}"
+                               readonly
+                               data-default-input="firstName"
+                               data-default-value="{{ user.first_name }}">
                         <div class="invalid-feedback"></div>
                     </div>
                     <div class="col-sm-4 col-2 d-flex align-items-center flex-row-reverse">
@@ -45,7 +55,8 @@
                            type="text"
                            id="formFirstName"
                            value="{{ user.first_name }}"
-                           style="margin-left: 0.75rem">
+                           style="margin-left: 0.75rem"
+                           data-default="firstName">
                     <div class="invalid-feedback"></div>
                 </div>
             </div>
@@ -55,7 +66,11 @@
                 </div>
                 <div class="col-sm-10 m-0 p-0 row" data-edit-block>
                     <div class="col-sm-8 col-10">
-                        <input class="form-control-plaintext" value="{{ user.last_name }}" readonly>
+                        <input class="form-control-plaintext"
+                               value="{{ user.last_name }}"
+                               readonly
+                               data-default-input="lastName"
+                               data-default-value="{{ user.last_name }}">
                         <div class="invalid-feedback"></div>
                     </div>
                     <div class="col-sm-4 col-2 d-flex align-items-center flex-row-reverse">
@@ -67,7 +82,8 @@
                            type="text"
                            id="formLastName"
                            value="{{ user.last_name }}"
-                           style="margin-left: 0.75rem">
+                           style="margin-left: 0.75rem"
+                           data-default="lastName">
                     <div class="invalid-feedback"></div>
                 </div>
             </div>
@@ -78,8 +94,10 @@
                 <div class="col-sm-10 m-0 p-0 row" data-edit-block>
                     <div class="col-sm-8 col-10">
                         <input class="form-control-plaintext"
-                               value="Последнее изменение: 3 дня назад"
-                               readonly>
+                               value="Обновлён {{ user.last_password_update|naturalday  }}"
+                               readonly
+                               data-default-input="password"
+                               data-default-value="">
                         <div class="invalid-feedback"></div>
                     </div>
                     <div class="col-sm-4 col-2 d-flex align-items-center flex-row-reverse">
@@ -98,7 +116,8 @@
                                id="formOldPassword"
                                autocomplete="new-password"
                                placeholder="Старый пароль"
-                               style="margin-left: 0.75rem">
+                               style="margin-left: 0.75rem"
+                               data-default="password">
                         <div class="invalid-feedback"></div>
                     </div>
                     <div class="mb-2 col-12 row">
@@ -107,7 +126,8 @@
                                id="formNewPassword1"
                                autocomplete="new-password"
                                placeholder="Новый пароль"
-                               style="margin-left: 0.75rem">
+                               style="margin-left: 0.75rem"
+                               data-default="password">
                         <div class="invalid-feedback"></div>
                     </div>
                     <div class="col-12 row">
@@ -116,7 +136,8 @@
                                id="formNewPassword2"
                                autocomplete="new-password"
                                placeholder="Подтверждение нового пароля"
-                               style="margin-left: 0.75rem">
+                               style="margin-left: 0.75rem"
+                               data-default="password">
                         <div class="invalid-feedback"></div>
                     </div>
                 </div>

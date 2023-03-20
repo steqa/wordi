@@ -5,19 +5,15 @@ fields.forEach((field) => {
 	field.addEventListener('input', (e) => {
 		clearTimeout(time);
 		time = setTimeout((e) => {
-			if (field.value) {
-				if (field.id === 'formEmail') {
-					validateEmail(field);
-				} else if (field.id === 'formNewPassword1') {
-					validatePassword(field);
-					validatePasswordsMatch();
-				} else if (field.id === 'formNewPassword2') {
-					validateSecondPassword(field);
-				} else {
-					validateField(field);
-				}
+			if (field.id === 'formEmail') {
+				validateEmail(field);
+			} else if (field.id === 'formNewPassword1') {
+				validatePassword(field);
+				validatePasswordsMatch();
+			} else if (field.id === 'formNewPassword2') {
+				validateSecondPassword(field);
 			} else {
-				displayFieldErrors(field);
+				validateField(field);
 			}
 		}, 500);
 	});
@@ -25,21 +21,41 @@ fields.forEach((field) => {
 
 function validateFields() {
 	let fieldsErrors = {};
+	passwordIsEdited = false;
+	oldPasswordIsEdited = document.getElementById('formOldPassword').value != '';
+	newPassword1IsEdited =
+		document.getElementById('formNewPassword1').value != '';
+	newPassword2IsEdited =
+		document.getElementById('formNewPassword2').value != '';
+	if (oldPasswordIsEdited || newPassword1IsEdited || newPassword2IsEdited) {
+		passwordIsEdited = true;
+	}
 	fields.forEach((field) => {
 		if (field.id === 'formEmail') {
 			const error = emailValidation(field);
 			if (error) {
 				fieldsErrors[field.id] = error;
 			}
+		} else if (field.id === 'formOldPassword') {
+			if (passwordIsEdited) {
+				const error = fieldValidation(field);
+				if (error) {
+					fieldsErrors[field.id] = error;
+				}
+			}
 		} else if (field.id === 'formNewPassword1') {
-			const error = passwordValidation(field);
-			if (error) {
-				fieldsErrors[field.id] = error;
+			if (passwordIsEdited) {
+				const error = passwordValidation(field);
+				if (error) {
+					fieldsErrors[field.id] = error;
+				}
 			}
 		} else if (field.id === 'formNewPassword2') {
-			const error = secondPasswordValidation(field);
-			if (error) {
-				fieldsErrors[field.id] = error;
+			if (passwordIsEdited) {
+				const error = secondPasswordValidation(field);
+				if (error) {
+					fieldsErrors[field.id] = error;
+				}
 			}
 		} else {
 			const error = fieldValidation(field);
@@ -49,7 +65,12 @@ function validateFields() {
 		}
 	});
 	displayFieldsErrors(fieldsErrors);
-	if (Object.keys(fieldsErrors).length > 0 || !validatePasswordsMatch()) {
+	if (passwordIsEdited) {
+		if (!validatePasswordsMatch()) {
+			return false;
+		}
+	}
+	if (Object.keys(fieldsErrors).length > 0) {
 		return false;
 	} else {
 		return true;
