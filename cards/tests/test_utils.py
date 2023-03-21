@@ -1,5 +1,6 @@
 from django.core.files.uploadedfile import TemporaryUploadedFile
 from django.test import TestCase
+from pydantic import ValidationError
 
 from accounts.models import User
 from cards.models import Card
@@ -23,12 +24,30 @@ class UtilsTests(TestCase):
         )
 
     def test_create_and_get_card_without_save(self):
-        json = '{"formFrontText": "Front Text", "formBackText": "Back Text"}'
-        card = create_and_get_card_without_save(
-            user=self.user, json=json)
-        self.assertEqual(card.user, self.user)
-        self.assertEqual(card.front_text, 'Front Text')
-        self.assertEqual(card.back_text, 'Back Text')
+        JSON_AND_EXPECTED_CARD_PARAMETERS = {
+            '{}':
+                ValidationError,
+            '{"formFrontText": "", "formBackText": "Back Text"}':
+                ValidationError,
+            '{"formFrontText": "Front Text", "formBackText": "Back Text"}':
+                {'card': self.card,
+                 'front_text': 'Front Text',
+                 'back_text': 'Back Text'},
+        }
+        for json, expected_card_parameters in \
+                JSON_AND_EXPECTED_CARD_PARAMETERS.items():
+            with self.subTest(f'{json=}'):
+                try:
+                    card = create_and_get_card_without_save(
+                        user=self.user, json=json)
+                    real_card_parameters = {'card': self.card,
+                                            'front_text': card.front_text,
+                                            'back_text': card.back_text}
+                except ValidationError:
+                    real_card_parameters = ValidationError
+
+                self.assertEqual(real_card_parameters,
+                                 expected_card_parameters)
 
     def test_create_and_get_card_images_without_save(self):
         with self.subTest('test: 1'):
