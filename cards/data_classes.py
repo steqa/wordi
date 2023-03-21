@@ -1,5 +1,3 @@
-from typing import Any, Optional
-
 from pydantic import BaseModel, Field, validator
 
 
@@ -9,8 +7,8 @@ class CardData(BaseModel):
 
 
 class CardImagesData(BaseModel):
-    front_image: Optional[list] = Field(alias='formFrontImage')
-    back_image: Optional[list] = Field(alias='formBackImage')
+    front_image: None | list = Field(alias='formFrontImage')
+    back_image: None | list = Field(alias='formBackImage')
 
     @ validator('front_image', 'back_image', allow_reuse=True)
     def test_type(cls, value: list) -> list:

@@ -39,7 +39,7 @@ function sendData() {
 			if (responseStatus === 200) {
 				localStorage.setItem('toastStatus', 'success');
 				localStorage.setItem('toastMessage', 'Карточка добавлена.');
-				window.location.replace(JSON.parse(data)['redirectUrl']);
+				window.location.replace(data['redirectUrl']);
 			} else if (responseStatus === 400) {
 				showToast('error', 'Что-то пошло не так.');
 			}
