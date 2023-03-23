@@ -1,3 +1,5 @@
+import os
+
 from django.core.files.uploadedfile import TemporaryUploadedFile
 from django.test import TestCase
 from pydantic import ValidationError
@@ -5,7 +7,8 @@ from pydantic import ValidationError
 from accounts.models import User
 from cards.models import Card
 from cards.utils import (create_and_get_card_images_without_save,
-                         create_and_get_card_without_save)
+                         create_and_get_card_without_save,
+                         delete_card_images_directory)
 
 
 class UtilsTests(TestCase):
@@ -70,3 +73,17 @@ class UtilsTests(TestCase):
             self.assertEqual(card_images.card, self.card)
             self.assertEqual(card_images.front_image, front_image)
             self.assertEqual(card_images.back_image, back_image)
+
+    def test_delete_card_images_directory(self):
+        with self.subTest('test: 1'):
+            dir_path = '/home/steqa/wordi/static/images/user_images/1/0'
+            os.mkdir(dir_path)
+            try:
+                delete_card_images_directory(user=self.user, card_pk=0)
+                os.path.exists(dir_path)
+            except:
+                dir_exists = True
+                os.rmdir(dir_path)
+            else:
+                dir_exists = False
+            self.assertFalse(dir_exists)

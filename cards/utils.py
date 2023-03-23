@@ -1,6 +1,9 @@
+import os
+
 from pydantic import ValidationError
 
 from accounts.models import User
+from wordi import settings
 
 from .data_classes import CardData, CardImagesData
 from .models import Card, CardImages
@@ -40,3 +43,10 @@ def create_and_get_card_images_without_save(
                 back_image=back_image
             )
             return card_images
+
+
+def delete_card_images_directory(user: User, card_pk: int) -> None:
+    dir_path = os.path.join(
+        settings.MEDIA_ROOT, 'user_images',
+        str(user.pk), str(card_pk))
+    os.rmdir(dir_path)
