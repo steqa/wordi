@@ -51,8 +51,8 @@ function changeTextPlaceholder(input) {
 		placeholderTextShow = document.getElementById('placeholderBackTextShow');
 	}
 	if (input.value != '') {
-		placeholderTextHide.style.display = 'none';
-		placeholderTextShow.style.display = 'flex';
+		placeholderTextHide.classList.add('visually-hidden');
+		placeholderTextShow.classList.remove('visually-hidden');
 		const value = input.value.split('\n');
 		innerValue = '';
 		value.forEach((v) => {
@@ -64,8 +64,8 @@ function changeTextPlaceholder(input) {
 		});
 		placeholderTextShow.innerHTML = innerValue;
 	} else {
-		placeholderTextHide.style.display = 'flex';
-		placeholderTextShow.style.display = 'none';
+		placeholderTextHide.classList.remove('visually-hidden');
+		placeholderTextShow.classList.add('visually-hidden');
 	}
 }
 
@@ -88,14 +88,14 @@ function changeImagePlaceholder(input) {
 	}
 	const image = input.files[0];
 	previewImage(image, placeholderImageHide, placeholderImageShow);
-	imageClearBtn.style.display = 'block';
+	imageClearBtn.classList.remove('visually-hidden');
 }
 
 function previewImage(image, placeholderImageHide, placeholderImageShow) {
 	const reader = new FileReader();
 	reader.addEventListener('load', () => {
-		placeholderImageHide.style.display = 'none';
-		placeholderImageShow.style.display = 'flex';
+		placeholderImageHide.classList.add('visually-hidden');
+		placeholderImageShow.classList.remove('visually-hidden');
 		const previewImageDiv = placeholderImageShow.querySelector('div');
 		previewImageDiv.style.backgroundImage = `url(${reader.result})`;
 	});
@@ -109,9 +109,9 @@ function clearPreviewImage(
 	placeholderImageShow
 ) {
 	input.value = '';
-	placeholderImageHide.style.display = 'flex';
-	placeholderImageShow.style.display = 'none';
+	placeholderImageHide.classList.remove('visually-hidden');
+	placeholderImageShow.classList.add('visually-hidden');
 	const previewImageDiv = placeholderImageShow.querySelector('div');
 	previewImageDiv.style.backgroundImage = '';
-	btn.style.display = 'none';
+	btn.classList.add('visually-hidden');
 }

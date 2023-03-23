@@ -15,10 +15,9 @@
                 <div>
                     <div class="d-flex justify-content-between">
                         <label for="formFrontImage" class="form-label">Изображение</label>
-                        <span class="form-image-clear-btn"
+                        <span class="form-image-clear-btn visually-hidden"
                               data-side="front"
-                              style="cursor: pointer;
-                                     display: none">Очистить</span>
+                              style="cursor: pointer">Очистить</span>
                     </div>
                     <input class="form-control add-input" type="file" id="formFrontImage">
                     <div class="invalid-feedback"></div>
@@ -33,10 +32,9 @@
                 <div>
                     <div class="d-flex justify-content-between">
                         <label for="formBackImage" class="form-label">Изображение</label>
-                        <span class="form-image-clear-btn"
+                        <span class="form-image-clear-btn visually-hidden"
                               data-side="back"
-                              style="cursor: pointer;
-                                     display: none">Очистить</span>
+                              style="cursor: pointer">Очистить</span>
                     </div>
                     <input class="form-control add-input" type="file" id="formBackImage">
                     <div class="invalid-feedback"></div>
@@ -76,7 +74,7 @@
                                 <div class="ratio-inner ratio-1-1">
                                     <div class="ratio-content placeholder" id="placeholderFrontImageHide">
                                         <svg width="100%"
-                                             height="180"
+                                             height="100%"
                                              xmlns="http://www.w3.org/2000/svg"
                                              role="img"
                                              aria-label="Placeholder"
@@ -85,9 +83,7 @@
                                             <rect width="100%" height="100%" fill="#868e96"></rect>
                                         </svg>
                                     </div>
-                                    <div class="ratio-content"
-                                         id="placeholderFrontImageShow"
-                                         style="display: none">
+                                    <div class="ratio-content visually-hidden" id="placeholderFrontImageShow">
                                         <div class="img-100"
                                              style="background-repeat: no-repeat;
                                                     background-position: center;
@@ -97,7 +93,7 @@
                             </div>
                         </div>
                         <div class="row" id="placeholderFrontTextHide">
-                            <p class="card-text col-12">
+                            <p class="card-text col-12" style="display: block;">
                                 <span class="placeholder col-7"></span>
                                 <span class="placeholder col-4"></span>
                                 <span class="placeholder col-4"></span>
@@ -105,7 +101,7 @@
                                 <span class="placeholder col-8"></span>
                             </p>
                         </div>
-                        <p class="card-text" id="placeholderFrontTextShow" style="display: none"></p>
+                        <p class="card-text visually-hidden" id="placeholderFrontTextShow"></p>
                     </div>
                 </div>
                 <div class="col-6 border-start">
@@ -115,7 +111,7 @@
                                 <div class="ratio-inner ratio-1-1">
                                     <div class="ratio-content placeholder" id="placeholderBackImageHide">
                                         <svg width="100%"
-                                             height="180"
+                                             height="100%"
                                              xmlns="http://www.w3.org/2000/svg"
                                              role="img"
                                              aria-label="Placeholder"
@@ -124,9 +120,7 @@
                                             <rect width="100%" height="100%" fill="#868e96"></rect>
                                         </svg>
                                     </div>
-                                    <div class="ratio-content"
-                                         id="placeholderBackImageShow"
-                                         style="display: none">
+                                    <div class="ratio-content visually-hidden" id="placeholderBackImageShow">
                                         <div class="img-100"
                                              style="background-repeat: no-repeat;
                                                     background-position: center;
@@ -136,7 +130,7 @@
                             </div>
                         </div>
                         <div class="row" id="placeholderBackTextHide">
-                            <p class="card-text col-12">
+                            <p class="card-text col-12" style="display: block;">
                                 <span class="placeholder col-7"></span>
                                 <span class="placeholder col-4"></span>
                                 <span class="placeholder col-4"></span>
@@ -144,7 +138,7 @@
                                 <span class="placeholder col-8"></span>
                             </p>
                         </div>
-                        <p class="card-text" id="placeholderBackTextShow" style="display: none"></p>
+                        <p class="card-text visually-hidden" id="placeholderBackTextShow"></p>
                     </div>
                 </div>
             </div>

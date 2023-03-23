@@ -14,7 +14,7 @@
 	--bs-primary-text: #6edff6;
 	--bs-primary-bg-subtle: #032830;
 	--bs-primary-border-subtle: #055160;
-	--bs-black-or-white-theme-color: #000;
+	--bs-black-or-white-theme-color: #212529;
 	--bs-black-or-white-text: #fff;
 	--bs-btn-transparent-bg-color: #424649;
 }
@@ -51,6 +51,20 @@
 	--bs-btn-disabled-bg: transparent;
 	--bs-btn-disabled-border-color: #0dcaf0;
 	--bs-gradient: none;
+}
+
+.btn-danger {
+	--bs-btn-color: var(--bs-black-or-white-theme-color);
+	--bs-btn-hover-color: var(--bs-black-or-white-theme-color);
+	--bs-btn-active-color: var(--bs-black-or-white-theme-color);
+	--bs-btn-disabled-color: var(--bs-black-or-white-theme-color);
+}
+
+.btn-secondary {
+	--bs-btn-color: var(--bs-black-or-white-theme-color);
+	--bs-btn-hover-color: var(--bs-black-or-white-theme-color);
+	--bs-btn-active-color: var(--bs-black-or-white-theme-color);
+	--bs-btn-disabled-color: var(--bs-black-or-white-theme-color);
 }
 
 .form-control:focus {
@@ -166,6 +180,16 @@
 	background-color: var(--bs-primary);
 }
 
+.card-text {
+	display: flex;
+	overflow-wrap: anywhere;
+}
+
+.card-text-edit-modal {
+	display: flex;
+	overflow-wrap: anywhere;
+}
+
 @media screen and (max-width: 1200px) {
 	.card-image {
 		width: 8rem;
@@ -173,9 +197,25 @@
 	}
 }
 
+@media screen and (max-width: 991px) {
+	.card-image-edit-modal {
+		width: 100%;
+		height: 100%;
+		margin-left: 0rem;
+	}
+
+	.card-text-edit-modal {
+		display: block;
+	}
+}
+
 @media screen and (max-width: 768px) {
 	.card-image {
 		width: 100%;
 		margin-left: 0rem;
+	}
+
+	.card-text {
+		display: block;
 	}
 }
