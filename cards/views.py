@@ -9,7 +9,8 @@ from accounts.utils import get_absolute_url
 
 from .models import Card, CardImages
 from .utils import (create_and_get_card_images_without_save,
-                    create_and_get_card_without_save)
+                    create_and_get_card_without_save,
+                    delete_card_images_directory)
 
 
 @login_required
@@ -20,6 +21,24 @@ def cards(request):
         'cards': cards,
         'cards_images': cards_images,
     }
+    if request.method == 'DELETE':
+        card_id = request.GET.get('cardID')
+        try:
+            card = Card.objects.get(user=request.user, pk=card_id)
+        except:
+            json_status = 400
+            error_message = 'Карточка не найдена.'
+            json_data = {'msg': error_message}
+        else:
+            card_pk = card.pk
+            card.delete()
+            delete_card_images_directory(request.user, card_pk)
+
+            json_status = 200
+            redirect_url = get_absolute_url(request, 'cards')
+            json_data = {'redirectUrl': redirect_url}
+
+        return JsonResponse(status=json_status, data=json_data)
     return render(request, 'cards/cards.html', context)
 
 
