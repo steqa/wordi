@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'userprofile.apps.UserprofileConfig',
     'cards.apps.CardsConfig',
+
+    'django_cleanup.apps.CleanupSelectedConfig'
 ]
 
 MIDDLEWARE = [

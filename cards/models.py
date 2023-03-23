@@ -1,4 +1,5 @@
 from django.db import models
+from django_cleanup import cleanup
 
 from accounts.models import User
 
@@ -31,6 +32,7 @@ def _get_card_back_image_filepath(self, image_name: str) -> str:
     return f'user_images/{self.card.user.pk}/{self.card.id}/back_image.jpg'
 
 
+@cleanup.select
 class CardImages(models.Model):
     card = models.ForeignKey(
         Card, verbose_name='карточка', on_delete=models.CASCADE)
