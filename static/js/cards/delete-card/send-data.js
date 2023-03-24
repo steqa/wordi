@@ -1,10 +1,10 @@
 const deleteBtn = document.getElementById('modalDeleteBtn');
 
 deleteBtn.addEventListener('click', (e) => {
-	sendData();
+	sendDeleteData();
 });
 
-function sendData() {
+function sendDeleteData() {
 	let responseStatus = null;
 	fetch(window.location.href + `?cardID=${deleteBtn.dataset.card}`, {
 		method: 'DELETE',
@@ -17,7 +17,6 @@ function sendData() {
 			return response.json();
 		})
 		.then((data) => {
-			console.log(data);
 			if (responseStatus === 200) {
 				localStorage.setItem('toastStatus', 'success');
 				localStorage.setItem('toastMessage', 'Карточка удалена.');

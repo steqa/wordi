@@ -145,10 +145,9 @@
                             <div class="mt-2">
                                 <div class="d-flex justify-content-between">
                                     <label for="formFrontImage" class="form-label">Изображение</label>
-                                    <span class="form-image-clear-btn"
+                                    <span class="form-image-clear-btn visually-hidden"
                                           data-side="front"
-                                          style="cursor: pointer;
-                                                 display: none">Очистить</span>
+                                          style="cursor: pointer">Очистить</span>
                                 </div>
                                 <input class="form-control add-input" type="file" id="formFrontImage">
                                 <div class="invalid-feedback"></div>
@@ -163,10 +162,9 @@
                             <div class="mt-2">
                                 <div class="d-flex justify-content-between">
                                     <label for="formBackImage" class="form-label">Изображение</label>
-                                    <span class="form-image-clear-btn"
+                                    <span class="form-image-clear-btn visually-hidden"
                                           data-side="back"
-                                          style="cursor: pointer;
-                                                 display: none">Очистить</span>
+                                          style="cursor: pointer">Очистить</span>
                                 </div>
                                 <input class="form-control add-input" type="file" id="formBackImage">
                                 <div class="invalid-feedback"></div>
@@ -296,9 +294,10 @@
             </div>
         </div>
     </div>
-    <script src="{% static 'js/cards/delete-card/delete-btn.js' %}"></script>
     <script src="{% static 'js/get-cookie.js' %}"></script>
+    <script src="{% static 'js/cards/delete-card/delete-btn.js' %}"></script>
     <script src="{% static 'js/cards/delete-card/send-data.js' %}"></script>
     <script src="{% static 'js/cards/edit-card/edit-btn.js' %}"></script>
     <script src="{% static 'js/cards/add-card/placeholder.js' %}"></script>
+    <script src="{% static 'js/cards/edit-card/send-data.js' %}"></script>
 {% endblock %}

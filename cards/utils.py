@@ -29,6 +29,26 @@ def create_card_images(
     return card_images
 
 
+def update_card(
+        card_pk: int, card_data: CardData) -> Card:
+    card = Card.objects.get(pk=card_pk)
+    if card_data.front_text:
+        card.front_text = card_data.front_text
+    if card_data.back_text:
+        card.back_text = card_data.back_text
+    card.save()
+    return card
+
+
+def update_card_images(
+        card_images_pk: int, card_images_data: CardImagesData) -> CardImages:
+    card_images = CardImages.objects.get(pk=card_images_pk)
+    card_images.front_image = card_images_data.front_image[0]
+    card_images.back_image = card_images_data.back_image[0]
+    card_images.save()
+    return card_images
+
+
 def delete_card_images_directory(user: User, card_pk: int) -> None:
     dir_path = os.path.join(
         settings.MEDIA_ROOT, 'user_images',

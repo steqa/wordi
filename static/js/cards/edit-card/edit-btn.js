@@ -47,6 +47,22 @@ editBtns.forEach((btn) => {
 			placeholderFrontImageShow.style.backgroundPosition = 'center';
 			placeholderFrontImageShow.style.backgroundSize = 'cover';
 			placeholderFrontImageShow.classList.remove('visually-hidden');
+
+			const formFrontImageClearBtn = document.querySelector(
+				'.form-image-clear-btn[data-side="front"]'
+			);
+			formFrontImageClearBtn.classList.remove('visually-hidden');
+
+			const formFrontImage = document.getElementById('formFrontImage');
+			const frontFile = new File([''], 'front_image.jpg', {
+				type: 'initial',
+			});
+			const frontDataTransfer = new DataTransfer();
+			frontDataTransfer.items.add(frontFile);
+			formFrontImage.files = frontDataTransfer.files;
+			if (formFrontImage.webkitEntries.length) {
+				formFrontImage.dataset.file = `${frontDataTransfer.files[0].name}`;
+			}
 		} else {
 			placeholderFrontImageHide.classList.remove('visually-hidden');
 			placeholderFrontImageShow.style.backgroundImage = '';
@@ -67,28 +83,26 @@ editBtns.forEach((btn) => {
 			placeholderBackImageShow.style.backgroundPosition = 'center';
 			placeholderBackImageShow.style.backgroundSize = 'cover';
 			placeholderBackImageShow.classList.remove('visually-hidden');
+
+			const formBackImageClearBtn = document.querySelector(
+				'.form-image-clear-btn[data-side="back"]'
+			);
+			formBackImageClearBtn.classList.remove('visually-hidden');
+
+			const formBackImage = document.getElementById('formBackImage');
+			const backFile = new File([''], 'back_image.jpg', {
+				type: 'initial',
+			});
+			const backDataTransfer = new DataTransfer();
+			backDataTransfer.items.add(backFile);
+			formBackImage.files = backDataTransfer.files;
+			if (formBackImage.webkitEntries.length) {
+				formBackImage.dataset.file = `${backDataTransfer.files[0].name}`;
+			}
 		} else {
 			placeholderBackImageHide.classList.remove('visually-hidden');
 			placeholderBackImageShow.style.backgroundImage = '';
 			placeholderBackImageShow.classList.add('visually-hidden');
-		}
-
-		const formFrontImage = document.getElementById('formFrontImage');
-		const frontFile = new File([''], 'front_image.jpg');
-		const frontDataTransfer = new DataTransfer();
-		frontDataTransfer.items.add(frontFile);
-		formFrontImage.files = frontDataTransfer.files;
-		if (formFrontImage.webkitEntries.length) {
-			formFrontImage.dataset.file = `${frontDataTransfer.files[0].name}`;
-		}
-
-		const formBackImage = document.getElementById('formBackImage');
-		const backFile = new File([''], 'back_image.jpg');
-		const backDataTransfer = new DataTransfer();
-		backDataTransfer.items.add(backFile);
-		formBackImage.files = backDataTransfer.files;
-		if (formBackImage.webkitEntries.length) {
-			formBackImage.dataset.file = `${backDataTransfer.files[0].name}`;
 		}
 	});
 });
