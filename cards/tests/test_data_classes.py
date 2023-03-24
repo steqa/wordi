@@ -31,11 +31,13 @@ class CardImagesDataTests(TestCase, TestDataClassFieldsPropertiesValuesMixin):
         cls.fields_and_properties = {
             'formFrontImage': {
                 'title': 'Formfrontimage',
+                'default': [None],
                 'type': 'array',
                 'items': {}
             },
             'formBackImage': {
                 'title': 'Formbackimage',
+                'default': [None],
                 'type': 'array',
                 'items': {}
             }
@@ -68,3 +70,15 @@ class CardImagesDataTests(TestCase, TestDataClassFieldsPropertiesValuesMixin):
         with self.assertRaisesMessage(
                 ValueError, 'Максимальный размер изображения — 25MB.'):
             CardImagesData.test_max_size([image_more_25_mb])
+
+    def test_is_not_empty(self):
+        image_jpeg = TemporaryUploadedFile('test', 'image/jpeg', 0, None)
+        IS_NOT_EMPTY_AND_FILES = {
+            False: {},
+            True: {'formFrontImage': [image_jpeg]},
+        }
+        for expected_is_not_empty, files in IS_NOT_EMPTY_AND_FILES.items():
+            with self.subTest(f'{files=}'):
+                card_images_data = CardImagesData.parse_obj(files)
+                real_is_not_empty = card_images_data.is_not_empty()
+                self.assertEqual(expected_is_not_empty, real_is_not_empty)

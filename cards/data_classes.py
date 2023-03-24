@@ -7,8 +7,8 @@ class CardData(BaseModel):
 
 
 class CardImagesData(BaseModel):
-    front_image: None | list = Field(alias='formFrontImage')
-    back_image: None | list = Field(alias='formBackImage')
+    front_image: list = Field(alias='formFrontImage', default=[None])
+    back_image: list = Field(alias='formBackImage', default=[None])
 
     @ validator('front_image', 'back_image', allow_reuse=True)
     def test_type(cls, value: list) -> list:
@@ -21,3 +21,11 @@ class CardImagesData(BaseModel):
         if value[0].size > 26214400:
             raise ValueError('Максимальный размер изображения — 25MB.')
         return value
+
+    def is_not_empty(self) -> bool:
+        front_image_is_not_empty = self.front_image != [None]
+        back_image_is_not_empty = self.back_image != [None]
+        if front_image_is_not_empty or back_image_is_not_empty:
+            return True
+        else:
+            return False

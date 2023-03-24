@@ -7,9 +7,9 @@ from pydantic import ValidationError
 
 from accounts.utils import get_absolute_url
 
+from .data_classes import CardData, CardImagesData
 from .models import Card, CardImages
-from .utils import (create_and_get_card_images_without_save,
-                    create_and_get_card_without_save,
+from .utils import (create_card, create_card_images,
                     delete_card_images_directory)
 
 
@@ -49,16 +49,14 @@ def add_card(request):
         post_json = json.dumps(request.POST)
         files_dict = dict(request.FILES.lists())
         try:
-            card = create_and_get_card_without_save(
-                user=user, json=post_json)
-            card_images = create_and_get_card_images_without_save(
-                card=card, images_dict=files_dict)
+            card_data = CardData.parse_raw(post_json)
+            card_images_data = CardImagesData.parse_obj(files_dict)
         except ValidationError as e:
             return JsonResponse(status=400, data=e.json(), safe=False)
         else:
-            card.save()
-            if card_images:
-                card_images.save()
+            card = create_card(user, card_data)
+            if card_images_data.is_not_empty():
+                card_images = create_card_images(card, card_images_data)
 
             json_status = 200
             redirect_url = get_absolute_url(request, 'cards')
