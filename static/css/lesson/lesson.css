@@ -1,0 +1,7 @@
+.bg-correct {
+	box-shadow: inset 0px 0px 10vw 0px rgba(25, 135, 84, 0.2);
+}
+
+.bg-incorrect {
+	box-shadow: inset 0px 0px 10vw 0px rgba(220, 53, 69, 0.2);
+}
