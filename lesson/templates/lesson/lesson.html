@@ -1,0 +1,72 @@
+{% extends 'cards/base.html' %}
+{% load static %}
+{% block title %}Урок{% endblock %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/center.css' %}">
+    <div class="center-outer"
+         style="margin-top: 56px;
+                height: calc(100% - 56px)">
+        <div class="center-middle">
+            <div class="center-inner col-5 mb-5">
+                {% for card in cards %}
+                    <div class="full-card visually-hidden">
+                        <div class="card front-side bg-body-tertiary"
+                             data-flashcard-id="{{ card.id }}">
+                            <div class="card-body d-flex">
+                                {% for card_image in cards_images %}
+                                    {% if card_image.card == card %}
+                                        {% if card_image.front_image %}
+                                            <div class="ratio me-3" style="width: 25%;">
+                                                <div class="ratio-inner ratio-1-1">
+                                                    <div class="ratio-content">
+                                                        <img src="{{ card_image.front_image.url }}"
+                                                             class="img-100 rounded"
+                                                             alt="...">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                                <div>
+                                    <p class="card-text">{{ card.front_text }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card back-side bg-body-tertiary mt-2 visually-hidden">
+                            <div class="card-body d-flex">
+                                {% for card_image in cards_images %}
+                                    {% if card_image.card == card %}
+                                        {% if card_image.back_image %}
+                                            <div class="ratio me-3" style="width: 25%;">
+                                                <div class="ratio-inner ratio-1-1">
+                                                    <div class="ratio-content">
+                                                        <img src="{{ card_image.back_image.url }}"
+                                                             class="img-100 rounded"
+                                                             alt="...">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                                <div>
+                                    <p class="card-text">{{ card.back_text }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <input class="form-control mt-3"
+                               placeholder="Ваш ответ"
+                               id="{{ card.id }}"
+                               name="{{ card.id }}"
+                               type="text"
+                               required>
+                        <input type="hidden" name="{{ card.id }}" value="{{ card.back_text }}">
+                        <button class="btn btn-outline-primary w-100 mt-3 submit-btn" type="button">Подтвердить</button>
+                    </div>
+                {% endfor %}
+                <button class="btn w-100 mt-3 visually-hidden" id="nextBtn" type="button">Продолжить</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
