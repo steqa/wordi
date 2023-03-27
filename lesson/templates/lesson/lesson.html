@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="{% static 'css/center.css' %}">
     <link rel="stylesheet" href="{% static 'css/lesson/lesson.css' %}">
     <div class="center-outer"
+         id="card-container"
          style="margin-top: 56px;
                 height: calc(100% - 56px)">
         <div class="center-middle">
@@ -56,12 +57,12 @@
                                 </div>
                             </div>
                         </div>
-                        <input class="form-control mt-3"
-                               placeholder="Ваш ответ"
-                               id="{{ card.id }}"
-                               name="answer"
-                               type="text"
-                               required>
+                        <textarea class="form-control mt-3"
+                                  placeholder="Ваш ответ"
+                                  id="{{ card.id }}"
+                                  name="answer"
+                                  type="text"
+                                  required></textarea>
                         <input type="hidden" name="{{ card.id }}" value="{{ card.back_text }}">
                         <button class="btn btn-outline-primary w-100 mt-3 submit-btn" type="button">Подтвердить</button>
                     </div>
@@ -69,6 +70,22 @@
                 <button class="btn w-100 mt-3 visually-hidden" id="nextBtn" type="button">Продолжить</button>
             </div>
         </div>
+    </div>
+    <div class="container visually-hidden" id="result-container">
+        <h3 class="mt-4 mb-3">Результат</h3>
+        <p class="mb-3">
+            Правильных ответов
+            <span id="correctAnswers"></span>
+            из
+            <span id="totalCards"></span>
+        </p>
+        <h3 class="mt-4 mb-3">Ваши ответы</h3>
+        <div id="cardsFeedback" class="row">
+            <hr>
+        </div>
+        <a href="{% url 'cards' %}"
+           class="btn btn-outline-primary w-100 my-3"
+           type="button">Продолжить</a>
     </div>
     <script src="{% static 'js/get-cookie.js' %}"></script>
     <script src="{% static 'js/lesson/send-data.js' %}"></script>

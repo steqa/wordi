@@ -60,6 +60,13 @@
 	--bs-btn-disabled-color: var(--bs-black-or-white-theme-color);
 }
 
+.btn-success {
+	--bs-btn-color: var(--bs-black-or-white-theme-color);
+	--bs-btn-hover-color: var(--bs-black-or-white-theme-color);
+	--bs-btn-active-color: var(--bs-black-or-white-theme-color);
+	--bs-btn-disabled-color: var(--bs-black-or-white-theme-color);
+}
+
 .btn-secondary {
 	--bs-btn-color: var(--bs-black-or-white-theme-color);
 	--bs-btn-hover-color: var(--bs-black-or-white-theme-color);

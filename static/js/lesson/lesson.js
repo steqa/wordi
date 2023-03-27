@@ -23,7 +23,7 @@ submitBtns.forEach((submitBtn) => {
 	submitBtn.addEventListener('click', (event) => {
 		const currentCard = cards[currentCardIndex];
 		const answer = currentCard
-			.querySelector('input[type="text"]')
+			.querySelector('textarea[type="text"]')
 			.value.trim()
 			.toLowerCase();
 		const correctAnswer = currentCard

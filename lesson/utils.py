@@ -25,7 +25,9 @@ def get_feedback_and_num_correct(
     feedback = {}
     for card_id, user_answer in user_answers.items():
         if card_id.isnumeric() and card_id in correct_answers:
-            if user_answer == correct_answers[card_id]:
+            user_answer = user_answer.strip().lower()
+            correct_answer = correct_answers[card_id].strip().lower()
+            if user_answer == correct_answer:
                 num_correct += 1
                 feedback[card_id] = 'correct'
             else:

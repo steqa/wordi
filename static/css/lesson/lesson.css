@@ -5,3 +5,13 @@
 .bg-incorrect {
 	box-shadow: inset 0px 0px 10vw 0px rgba(220, 53, 69, 0.2);
 }
+
+.card-correct {
+	background-color: rgb(43, 53, 48);
+	border-color: var(--bs-success);
+}
+
+.card-incorrect {
+	background-color: rgb(53, 43, 43);
+	border-color: var(--bs-danger);
+}
