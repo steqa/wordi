@@ -59,7 +59,7 @@
                         <input class="form-control mt-3"
                                placeholder="Ваш ответ"
                                id="{{ card.id }}"
-                               name="{{ card.id }}"
+                               name="answer"
                                type="text"
                                required>
                         <input type="hidden" name="{{ card.id }}" value="{{ card.back_text }}">
@@ -70,5 +70,7 @@
             </div>
         </div>
     </div>
+    <script src="{% static 'js/get-cookie.js' %}"></script>
+    <script src="{% static 'js/lesson/send-data.js' %}"></script>
     <script src="{% static 'js/lesson/lesson.js' %}"></script>
 {% endblock %}

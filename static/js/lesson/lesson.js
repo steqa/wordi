@@ -12,17 +12,15 @@ function showNextCard() {
 	cards[currentCardIndex].classList.add('visually-hidden');
 	currentCardIndex++;
 	if (currentCardIndex >= cards.length) {
-		console.log('END');
+		sendData();
 	} else {
 		cards[currentCardIndex].classList.remove('visually-hidden');
 	}
-	console.log(cards);
 }
 
 const submitBtns = document.querySelectorAll('.submit-btn');
 submitBtns.forEach((submitBtn) => {
 	submitBtn.addEventListener('click', (event) => {
-		console.log('click');
 		const currentCard = cards[currentCardIndex];
 		const answer = currentCard
 			.querySelector('input[type="text"]')
