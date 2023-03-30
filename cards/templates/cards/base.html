@@ -78,7 +78,7 @@
                             <a class="nav-link" href="{% url 'lesson' %}">Урок</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Статистика</a>
+                            <a class="nav-link" href="{% url 'stats' %}">Статистика</a>
                         </li>
                     </ul>
                     {% if request.user.is_authenticated %}

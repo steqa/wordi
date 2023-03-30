@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'userprofile.apps.UserprofileConfig',
     'cards.apps.CardsConfig',
     'lesson.apps.LessonConfig',
+    'stats.apps.StatsConfig',
 
     'django_cleanup.apps.CleanupSelectedConfig'
 ]
