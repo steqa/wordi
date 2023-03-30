@@ -28,10 +28,8 @@ class LessonStatsTests(TestCase, TestFieldsParametersValuesMixin):
                 'correct_answers': 'количество правильных ответов',
                 'consecutive_days': 'количество последовательных дней'
             },
-            'auto_now_add': {
-                'date': True
-            },
             'default': {
+                'date': date.today,
                 'correct_answers': 0,
                 'consecutive_days': 0
             }
@@ -42,8 +40,8 @@ class LessonStatsTests(TestCase, TestFieldsParametersValuesMixin):
 
     def test_str_method(self):
         self.assertEqual(
-            f'test@gmail.com - {date.today()}',
-            f'{self.LessonStats.user} - {self.LessonStats.date}'
+            LessonStats.__str__(self.LessonStats),
+            f'test@gmail.com - {date.today()}'
         )
 
     def test_model_verbose_name(self):

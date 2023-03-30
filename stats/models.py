@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.db import models
 
 from accounts.models import User
@@ -7,7 +9,7 @@ class LessonStats(models.Model):
     user = models.ForeignKey(
         User, verbose_name="пользователь", on_delete=models.CASCADE)
     date = models.DateField(
-        verbose_name="дата", auto_now_add=True)
+        verbose_name="дата", default=date.today)
     correct_answers = models.PositiveIntegerField(
         verbose_name="количество правильных ответов", default=0)
     consecutive_days = models.PositiveIntegerField(
