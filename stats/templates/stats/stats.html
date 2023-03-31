@@ -1,0 +1,45 @@
+{% extends 'cards/base.html' %}
+{% load static %}
+{% block title %}Статистика{% endblock %}
+{% block content %}
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://unpkg.com/js-year-calendar@latest/dist/js-year-calendar.min.css"/>
+    <link rel="stylesheet" href="{% static 'css/stats/calendar.css' %}">
+    <script src="https://unpkg.com/js-year-calendar@latest/dist/js-year-calendar.min.js"></script>
+    <script src="https://unpkg.com/js-year-calendar@latest/locales/js-year-calendar.ru.js"></script>
+    <div class="container">
+        <h3 class="mt-3 mb-1 p-0 text-white">
+            <span id="consecutiveDays" class="text-primary fs-2">{{ last_consecutive_days }}</span> <span id="consecutiveDaysTitle"></span> подряд вы повторяете свои карточки
+        </h3>
+        {% if today_lesson_complete is False %}<p class="m-0">Сегодня вы не прошли урок</p>{% endif %}
+        <div class="mt-3 mb-3 d-flex">
+            <h3 class="me-2 text-body">Статистика за</h3>
+            <h3 class="dropdown d-flex" id="yearDropdown" bis_skin_checked="1">
+                <button class="text-decoration-underline icon-btn edit-icon-btn"
+                        style="padding: 0px"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                    <span></span>
+                </button>
+                <span class="ms-2 text-body">год</span>
+                <ul class="dropdown-menu dropdown-menu-end mt-2 text-small shadow">
+                    <li>
+                        <a class="dropdown-item year-btn">2023</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item year-btn">2022</a>
+                    </li>
+                </ul>
+            </h3>
+        </div>
+        <div >
+            <div class="bg-body-tertiary calendar" id="calendar"></div>
+        </div>
+        <script src="{% static 'js/stats/consecutive-days.js' %}"></script>
+        <script src="{% static 'js/get-cookie.js' %}"></script>
+        <script src="{% static 'js/stats/change-year-toggle.js' %}"></script>
+        <script src="{% static 'js/stats/get-calendar-data.js' %}"></script>
+        <script src="{% static 'js/stats/calendar.js' %}"></script>
+    </div>
+{% endblock %}

@@ -1,0 +1,7 @@
+.calendar {
+	padding: 0px;
+	border: 1px var(--bs-border-style) var(--bs-border-color) !important;
+}
+.month-container {
+	border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
+}
