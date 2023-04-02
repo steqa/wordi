@@ -4,9 +4,9 @@ from django.test import TestCase
 
 from accounts.models import User
 from stats.models import LessonStats
-from stats.utils import (get_consecutive_days, get_correct_answers_by_day,
-                         get_last_consecutive_days, get_today_lesson_complete,
-                         save_stats, validate_year)
+from stats.utils import (get_calendar_data_for_year, get_consecutive_days,
+                         get_correct_answers_by_day, get_last_consecutive_days,
+                         get_today_lesson_complete, save_stats, validate_year)
 
 
 class UtilsTests(TestCase):
@@ -84,6 +84,32 @@ class UtilsTests(TestCase):
             with self.subTest(f'{year=}, {expected_value=}'):
                 real_value = validate_year(year)
                 self.assertEqual(real_value, expected_value)
+
+    def get_calendar_data_for_year(self):
+        user = self.user
+        with self.subTest('test 1'):
+            real_value = get_calendar_data_for_year(user, date.today().year)
+            expected_value = {}
+            self.assertEqual(real_value, expected_value)
+
+        with self.subTest('test 2'):
+            LessonStats.objects.create(
+                user=user,
+                correct_answers=5
+            )
+            real_value = get_calendar_data_for_year(user, date.today().year)
+            expected_value = {str(date.today()): 5}
+            self.assertEqual(real_value, expected_value)
+
+        with self.subTest('test 3'):
+            LessonStats.objects.create(
+                user=user,
+                date=date.today() - timedelta(days=365),
+                correct_answers=5
+            )
+            real_value = get_calendar_data_for_year(user, date.today().year)
+            expected_value = {str(date.today()): 5}
+            self.assertEqual(real_value, expected_value)
 
     def test_get_correct_answers_by_day(self):
         with self.subTest('test 1'):
