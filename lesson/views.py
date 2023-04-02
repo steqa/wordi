@@ -5,6 +5,7 @@ from django.http.response import JsonResponse
 from django.shortcuts import render
 
 from cards.models import Card, CardImages
+from stats.utils import get_consecutive_days, save_stats
 from wordi.utils import return_bad_request
 
 from .utils import (get_correct_answers, get_feedback_and_num_correct,
@@ -31,6 +32,10 @@ def lesson(request):
         correct_answers = get_correct_answers(cards)
         feedback, num_correct = get_feedback_and_num_correct(
             user_answers, correct_answers)
+
+        user = request.user
+        consecutive_days = get_consecutive_days(user)
+        save_stats(user, num_correct, consecutive_days)
 
         json_status = 200
         json_data = {'feedback': feedback,

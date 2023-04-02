@@ -90,3 +90,31 @@ def get_calendar_data_for_period(
         current_date += timedelta(days=1)
 
     return calendar_data
+
+
+def get_consecutive_days(user: User) -> int:
+    yesterday = date.today() - timedelta(days=1)
+
+    last_lesson_stats = LessonStats.objects.filter(
+        user=user).order_by('-date').first()
+
+    if (last_lesson_stats) and (last_lesson_stats.date == yesterday):
+        consecutive_days = last_lesson_stats.consecutive_days + 1
+    else:
+        consecutive_days = 0
+
+    return consecutive_days
+
+
+def save_stats(
+        user: User, correct_answers: int,
+        consecutive_days: int) -> LessonStats:
+    lesson_stats, created = LessonStats.objects.get_or_create(
+        user=user,
+        date=date.today()
+    )
+    if created:
+        lesson_stats.consecutive_days = consecutive_days
+    lesson_stats.correct_answers += correct_answers
+    lesson_stats.save()
+    return lesson_stats
