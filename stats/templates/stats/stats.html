@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'css/stats/calendar.css' %}">
     <script src="https://unpkg.com/js-year-calendar@latest/dist/js-year-calendar.min.js"></script>
     <script src="https://unpkg.com/js-year-calendar@latest/locales/js-year-calendar.ru.js"></script>
+    {% csrf_token %}
     <div class="container">
         <h3 class="mt-3 mb-1 p-0 text-white">
             <span id="consecutiveDays" class="text-primary fs-2">{{ last_consecutive_days }}</span> <span id="consecutiveDaysTitle"></span> подряд вы повторяете свои карточки
@@ -37,7 +38,7 @@
             <div class="bg-body-tertiary calendar" id="calendar"></div>
         </div>
         <script src="{% static 'js/stats/consecutive-days.js' %}"></script>
-        <script src="{% static 'js/get-cookie.js' %}"></script>
+        <script src="{% static 'js/get-csrftoken.js' %}"></script>
         <script src="{% static 'js/stats/change-year-toggle.js' %}"></script>
         <script src="{% static 'js/stats/get-calendar-data.js' %}"></script>
         <script src="{% static 'js/stats/calendar.js' %}"></script>

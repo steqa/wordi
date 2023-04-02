@@ -7,6 +7,7 @@
         <div class="center-middle">
             <div class="center-inner col-4 mb-5">
                 <h3 class="mb-3">Новый пароль</h3>
+                {% csrf_token %}
                 <div class="mb-2">
                     <label for="formNewPassword1" class="form-label">Новый пароль</label>
                     <input class="form-control"
@@ -29,7 +30,7 @@
             </div>
         </div>
     </div>
-    <script src="{% static 'js/get-cookie.js' %}"></script>
+    <script src="{% static 'js/get-csrftoken.js' %}"></script>
     <script src="{% static 'js/accounts/form-validation/display-validation-errors.js' %}"></script>
     <script src="{% static 'js/accounts/reset-password/confirm/form-validation.js' %}"></script>
     <script src="{% static 'js/accounts/reset-password/confirm/send-data.js' %}"></script>

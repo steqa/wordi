@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="{% static 'css/cards/add-card.css' %}">
     <div class="container">
         <h3 class="mt-4 mb-3">Создание карточки</h3>
+        {% csrf_token %}
         <div class="row">
             <div class="col-6">
                 <div>
@@ -155,7 +156,7 @@
             </button>
         </div>
     </div>
-    <script src="{% static 'js/get-cookie.js' %}"></script>
+    <script src="{% static 'js/get-csrftoken.js' %}"></script>
     <script src="{% static 'js/cards/add-card/placeholder.js' %}"></script>
     <script src="{% static 'js/cards/add-card/form-validation.js' %}"></script>
     <script src="{% static 'js/cards/add-card/send-data.js' %}"></script>

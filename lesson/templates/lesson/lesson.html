@@ -4,6 +4,7 @@
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/center.css' %}">
     <link rel="stylesheet" href="{% static 'css/lesson/lesson.css' %}">
+    {% csrf_token %}
     <div class="center-outer"
          id="card-container"
          style="margin-top: 56px;
@@ -87,7 +88,7 @@
            class="btn btn-outline-primary w-100 my-3"
            type="button">Продолжить</a>
     </div>
-    <script src="{% static 'js/get-cookie.js' %}"></script>
+    <script src="{% static 'js/get-csrftoken.js' %}"></script>
     <script src="{% static 'js/lesson/send-data.js' %}"></script>
     <script src="{% static 'js/lesson/lesson.js' %}"></script>
 {% endblock %}

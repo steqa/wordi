@@ -6,6 +6,7 @@
     <div class="container">
         <div class="container">
             <h3 class="mt-4 mb-3">Настройки</h3>
+            {% csrf_token %}
             <div class="row px-1 py-2 m-0 rounded">
                 <div class="col-sm-2 d-flex align-items-center">
                     <label for="formEmail" class="form-label text-light m-0">Email</label>
@@ -150,7 +151,7 @@
             </div>
         </div>
     </div>
-    <script src="{% static 'js/get-cookie.js' %}"></script>
+    <script src="{% static 'js/get-csrftoken.js' %}"></script>
     <script src="{% static 'js/userprofile/inputs.js' %}"></script>
     <script src="{% static 'js/accounts/form-validation/display-validation-errors.js' %}"></script>
     <script src="{% static 'js/accounts/form-validation/email-validation.js' %}"></script>

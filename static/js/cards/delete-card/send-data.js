@@ -9,7 +9,7 @@ function sendDeleteData() {
 	fetch(window.location.href + `?cardID=${deleteBtn.dataset.card}`, {
 		method: 'DELETE',
 		headers: {
-			'X-CSRFToken': getCookie('csrftoken'),
+			'X-CSRFToken': getCSRFToken(),
 		},
 	})
 		.then((response) => {

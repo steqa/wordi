@@ -26,7 +26,7 @@ function sendEditData() {
 	fetch(window.location.href + `?cardID=${editBtn.dataset.card}`, {
 		method: 'PUT',
 		headers: {
-			'X-CSRFToken': getCookie('csrftoken'),
+			'X-CSRFToken': getCSRFToken(),
 		},
 		body: formData,
 	})

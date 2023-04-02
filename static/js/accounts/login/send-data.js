@@ -20,7 +20,7 @@ function sendData() {
 	fetch(window.location.href, {
 		method: 'POST',
 		headers: {
-			'X-CSRFToken': getCookie('csrftoken'),
+			'X-CSRFToken': getCSRFToken(),
 		},
 		body: formData,
 	})
@@ -42,5 +42,8 @@ function sendData() {
 				}
 			}
 		})
-		.catch((error) => console.error(error));
+		.catch((error) => {
+			showToast('error', 'Что-то пошло не так.');
+			console.error(error);
+		});
 }

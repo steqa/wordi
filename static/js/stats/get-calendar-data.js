@@ -12,7 +12,7 @@ function getCalendarData() {
 	return fetch(window.location.href + `?year=${selectedYear}`, {
 		method: 'GET',
 		headers: {
-			'X-CSRFToken': getCookie('csrftoken'),
+			'X-CSRFToken': getCSRFToken(),
 		},
 	})
 		.then((response) => {

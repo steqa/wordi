@@ -20,7 +20,7 @@ function sendData() {
 	fetch(window.location.href, {
 		method: 'POST',
 		headers: {
-			'X-CSRFToken': getCookie('csrftoken'),
+			'X-CSRFToken': getCSRFToken(),
 		},
 		body: formData,
 	})
