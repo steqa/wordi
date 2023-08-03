@@ -18,8 +18,8 @@ class CardImagesData(BaseModel):
 
     @ validator('front_image', 'back_image', allow_reuse=True)
     def test_max_size(cls, value: list) -> list:
-        if value[0].size > 26214400:
-            raise ValueError('Максимальный размер изображения — 25MB.')
+        if value[0].size > 1048576:
+            raise ValueError('Максимальный размер изображения — 1MB.')
         return value
 
     def is_not_empty(self) -> bool:

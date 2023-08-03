@@ -78,8 +78,8 @@ function imageFieldValidation(field) {
 	if (typeof file === 'undefined' || file === '' || file === null) {
 		return false;
 	}
-	if (file.size > 26214400) {
-		errors.push('Максимальный размер изображения — 25MB.');
+	if (file.size > 1048576) {
+		errors.push('Максимальный размер изображения — 1MB.');
 	}
 	if (file.type != 'image/png' && file.type != 'image/jpeg') {
 		errors.push('Допустимые форматы изображений JPG и PNG.');
