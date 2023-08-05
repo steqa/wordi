@@ -1,6 +1,6 @@
 # Wordi - сайт-словарь для людей, изучающих новые языки.
 
-### [Перейти на сайт](https://wordi.herokuapp.com/cards/ 'https://wordi.steqa.ru/')
+### [Перейти на сайт](https://wordi.steqa.ru/ 'https://wordi.steqa.ru/')
 
 ## Основной функционал
 
